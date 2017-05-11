@@ -1,5 +1,7 @@
 #    -*- mode: shell-script -*-
 
+SCRIPT_DIR=$(dirname "$0:A")
+
 # History configuration
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -57,8 +59,8 @@ bindkey "^[[3~" delete-char
 
 PROMPT="%n@%m:%~%# "
 
-MY_PATH=/home/zaur/.local/bin:~/.config/git/bin
-PATH=$PATH:MY_PATH
+MY_PATH=/home/zaur/.local/bin:$SCRIPT_DIR/../git/bin
+PATH=$PATH:$MY_PATH
 
 
 # KeyChain for storing SSH passwords
