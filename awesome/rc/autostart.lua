@@ -1,0 +1,11 @@
+loadrc("util", "zawesome/util")
+
+-- run_once("glipper", nil, ".*glipper")
+run_once("xscreensaver -no-splash", nil, ".*xscreensaver.*")
+run_once("vivaldi-snapshot", nil, ".*vivaldi-bin.*")
+run_once("emacs")
+run_once("telegram", nil, ".*Telegram.*")
+run_once("skype")
+run_once("thunderbird")
+run_once("icedove")
+run_once("dropbox start")

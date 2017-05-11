@@ -1,0 +1,3 @@
+[submodule "git/submodules/git-recall"]
+	path = git/submodules/git-recall
+	url = https://github.com/Fakerr/git-recall.git
