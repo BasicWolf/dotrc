@@ -591,6 +591,9 @@
   (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.handlebars" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.hbs" . web-mode))
+
+  (setq web-mode-engines-alist
+      '(("handlebars"    . "\\.hbs\\'")))
 t)
 
 (defun dotemacs-init-org ()
