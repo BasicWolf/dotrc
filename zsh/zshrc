@@ -37,6 +37,23 @@ unset GREP_OPTIONS
 ### END OF EARLY HACKS ###
 
 
+#=== Packages ===#
+# virtualenvwrapper
+WORKON_HOME=~/.virtualenvs
+[[ -a /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]] &&
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh;
+[[ -a /usr/bin/virtualenvwrapper.sh ]] &&
+    source /usr/bin/virtualenvwrapper.sh;
+
+# NPM packages in homedir
+NPM_PACKAGES="$HOME/.npm-packages"
+
+# zsh-git-prompt
+source $SCRIPT_DIR/contrib/zsh-git-prompt/zshrc.sh
+
+# Contribs
+fpath=($SCRIPT_DIR/contrib $fpath)
+
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -57,7 +74,7 @@ bindkey "^?" backward-delete-char
 bindkey "^[[3~" delete-char
 
 
-PROMPT="%n@%m:%~%# "
+PROMPT="%n@%m:%~$(git_super_status)%# "
 
 MY_PATH=/home/zaur/.local/bin:$SCRIPT_DIR/../git/bin
 PATH=$PATH:$MY_PATH
@@ -78,16 +95,4 @@ alias ls='ls -h --color'
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
-
-
-#=== Packages ===#
-# virtualenvwrapper
-WORKON_HOME=~/.virtualenvs
-[[ -a /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]] &&
-    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh;
-[[ -a /usr/bin/virtualenvwrapper.sh ]] &&
-    source /usr/bin/virtualenvwrapper.sh;
-
-# NPM packages in homedir
-NPM_PACKAGES="$HOME/.npm-packages"
 

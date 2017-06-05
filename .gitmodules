@@ -1,3 +1,9 @@
 [submodule "git/submodules/git-recall"]
 	path = git/submodules/git-recall
 	url = https://github.com/Fakerr/git-recall.git
+[submodule "zsh/zsh-git-prompt"]
+	path = zsh/zsh-git-prompt
+	url = https://github.com/olivierverdier/zsh-git-prompt
+[submodule "zsh/contrib/zsh-git-prompt"]
+	path = zsh/contrib/zsh-git-prompt
+	url = https://github.com/olivierverdier/zsh-git-prompt
