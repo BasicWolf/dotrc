@@ -48,9 +48,6 @@ WORKON_HOME=~/.virtualenvs
 # NPM packages in homedir
 NPM_PACKAGES="$HOME/.npm-packages"
 
-# zsh-git-prompt
-source $SCRIPT_DIR/contrib/zsh-git-prompt/zshrc.sh
-
 # Contribs
 fpath=($SCRIPT_DIR/contrib $fpath)
 
@@ -74,7 +71,7 @@ bindkey "^?" backward-delete-char
 bindkey "^[[3~" delete-char
 
 
-PROMPT="%n@%m:%~$(git_super_status)%# "
+PROMPT="%n@%m:%~%# "
 
 MY_PATH=/home/zaur/.local/bin:$SCRIPT_DIR/../git/bin
 PATH=$PATH:$MY_PATH
