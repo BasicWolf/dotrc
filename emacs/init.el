@@ -294,6 +294,7 @@
   (setq projectile-enable-caching t)
   (setq projectile-cache-file (expand-file-name "projectile.cache" var-dir))
   (setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" var-dir))
+  (setq projectile-globally-ignored-directories (append '(".node_modules") projectile-globally-ignored-directories))
 
   ;; flycheck
   (require-or-install 'flycheck)
