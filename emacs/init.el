@@ -381,6 +381,7 @@
   (setq dired-recursive-copies 'top)
   (setq dired-recursive-deletes 'top)
   (setq diredp-hide-details-initially-flag nil)
+  (setq dired-listing-switches "-alh")
   (add-to-list 'dired-compress-file-suffixes
                '("\\.zip\\'" ".zip" "unzip"))
   t)
