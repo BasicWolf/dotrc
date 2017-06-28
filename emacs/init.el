@@ -296,6 +296,14 @@
   (setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" var-dir))
   (setq projectile-globally-ignored-directories (append '(".node_modules") projectile-globally-ignored-directories))
 
+  (setq projectile-globally-ignored-directories
+        (append '(".git" ".hg")
+                projectile-globally-ignored-directories))
+
+  (setq projectile-globally-ignored-files
+        (append '("*.gz" "*.pyc" "*.pyo" "*.jar" "*.tar.gz" "*.tgz" "*.zip")
+                projectile-globally-ignored-files))
+
   ;; flycheck
   (require-or-install 'flycheck)
 
