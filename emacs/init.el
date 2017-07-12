@@ -459,6 +459,7 @@
     )
 
   (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.json" . json-mode))
 
   (add-hook 'js2-mode-hook 'my-js2-mode-hook)
   t)
@@ -601,9 +602,12 @@
   (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.handlebars" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.hbs" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml" . web-mode))
 
   (setq web-mode-engines-alist
-      '(("handlebars"    . "\\.hbs\\'")))
+        '(("handlebars"    . "\\.hbs\\'")
+          ("django"    . "\\.djhtml\\'"))
+        )
 t)
 
 (defun dotemacs-init-org ()
