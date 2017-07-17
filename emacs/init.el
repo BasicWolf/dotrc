@@ -592,6 +592,11 @@
 
 (defun dotemacs-init-web ()
   (defun my-web-mode-hook ()
+    (setq web-mode-engines-alist
+          '(("handlebars"    . "\\.hbs\\'")
+            ("django"    . "\\.djhtml\\'"))
+          )
+
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-css-indent-offset 2)
     (setq web-mode-code-indent-offset 4)
@@ -603,14 +608,12 @@
   (add-to-list 'auto-mode-alist '("\\.handlebars" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.hbs" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml" . web-mode))
-
-  (setq web-mode-engines-alist
-        '(("handlebars"    . "\\.hbs\\'")
-          ("django"    . "\\.djhtml\\'"))
-        )
 t)
 
 (defun dotemacs-init-org ()
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "WAIT(w@/!)" "IN PROGRESS(p!)" "|" "DONE(d!)" "CANCELED(c@)")))
+
   (defun my-org-mode-hook ()
     (setq org-log-done t)
 
@@ -620,9 +623,6 @@ t)
     (org-indent-mode t)
     (global-set-key (kbd "<C-c l>") 'org-store-link)
     (global-set-key (kbd "<C-c a>") 'org-agenda)
-
-    (setq org-todo-keywords
-          '((sequence "TODO(t)" "WAIT(w@/!)" "IN PROGRESS(p!)" "|" "DONE(d!)" "CANCELED(c@)")))
     t)
   (add-hook 'org-mode-hook  'my-org-mode-hook)
   t)
