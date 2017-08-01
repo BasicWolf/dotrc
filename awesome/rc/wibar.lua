@@ -13,7 +13,7 @@ tags = {
    keys = {{"#10"}, {"#11"}, {"#12"}, {"q", "Cyrillic_ya"}, {"w", "Cyrillic_sha"}},
    layout = {
       config.layouts[4], -- web
-      config.layouts[4], -- dev
+      config.layouts[1], -- dev
       config.layouts[1], -- term
       config.layouts[3], -- msg
       config.layouts[1] -- various
