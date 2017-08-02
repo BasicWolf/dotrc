@@ -306,6 +306,7 @@
 
   ;; flycheck
   (require-or-install 'flycheck)
+  (add-hook 'after-init-hook #'global-flycheck-mode)
 
   ;; i-search
   (setq case-fold-search 1)
@@ -418,7 +419,21 @@
 
 
 (defun dotemacs-init-python ()
+  (declare-function python-shell-calculate-exec-path "python")
+
+  (defun flycheck-virtualenv-executable-find (executable)
+    "Find an EXECUTABLE in the current virtualenv if any."
+    (if (bound-and-true-p python-shell-virtualenv-root)
+        (let ((exec-path (python-shell-calculate-exec-path)))
+          (executable-find executable))
+      (executable-find executable)))
+
+  (defun flycheck-virtualenv-setup ()
+    "Setup Flycheck for the current virtualenv."
+    (setq-local flycheck-executable-find #'flycheck-virtualenv-executable-find))
+
   (defun my-python-mode-hook ()
+    (flycheck-virtualenv-setup)
 
     (which-function-mode t)
     ;; spell check only strings/comments when in Python mode:
