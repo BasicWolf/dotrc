@@ -421,6 +421,8 @@
 (defun dotemacs-init-python ()
   (declare-function python-shell-calculate-exec-path "python")
 
+  (defalias 'workon 'pyvenv-workon)
+  
   (defun flycheck-virtualenv-executable-find (executable)
     "Find an EXECUTABLE in the current virtualenv if any."
     (if (bound-and-true-p python-shell-virtualenv-root)
