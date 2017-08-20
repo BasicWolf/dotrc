@@ -47,8 +47,6 @@
   (dotemacs-init-overrides)
   (message "Main complete")
   t)
-
-
 ;; ************************************************************************** ;;
 ;; ************************************************************************** ;;
 
@@ -242,18 +240,6 @@
   (setq flyspell-issue-welcome-flag nil) ;; improve flyspell performance
   (add-to-list 'auto-mode-alist '("\\.txt$" . flyspell-mode))
 
-  ;; autocomplete
-  ;; (require 'auto-complete-config)
-  ;; (ac-config-default)
-  ;; (add-to-list 'ac-dictionary-directories (concat init-dir "share/ac-dict"))
-  ;; (setq ac-auto-start 1)  ;; start completion when entered 4 characters
-
-  ;; autocomplete via company
-  (require-or-install 'company)
-  (setq company-idle-delay 0.2)
-  (setq company-minimum-prefix-length 1)
-
-
   ;; bury *scratch* buffer instead of kill it
   (defadvice kill-buffer (around kill-buffer-around-advice activate)
     (let ((buffer-to-kill (ad-get-arg 0)))
@@ -422,7 +408,7 @@
   (declare-function python-shell-calculate-exec-path "python")
 
   (defalias 'workon 'pyvenv-workon)
-  
+
   (defun flycheck-virtualenv-executable-find (executable)
     "Find an EXECUTABLE in the current virtualenv if any."
     (if (bound-and-true-p python-shell-virtualenv-root)
@@ -448,7 +434,8 @@
 
     (setq jedi:complete-on-dot t)
     (jedi:setup)
-
+    (ac-flyspell-workaround)
+    
     (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
     (define-key python-mode-map (kbd "C-c .") 'jedi:goto-definition)
     (define-key python-mode-map (kbd "C-c d") 'python-toggle-pudb)
