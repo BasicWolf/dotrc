@@ -30,8 +30,8 @@ shutdown_commands_menu = {
          awful.util.spawn("systemctl suspend", false)
       end
    },
-   -- { "Restart", function() awful.util.spawn("systemctl reboot", false) end },
-   -- { "Power off", function() awful.util.spawn("systemctl poweroff", false) end }
+   { "Restart", function() awful.util.spawn("systemctl reboot", false) end },
+   { "Power off", function() awful.util.spawn("systemctl poweroff", false) end }
 }
 
 
