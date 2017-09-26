@@ -17,6 +17,7 @@
   (dotemacs-init-load-path)
   (dotemacs-init-for-debian)
   (dotemacs-init-package-archives)
+  (dotemacs-init-load-packages)
   (dotemacs-init-utils)
   (dotemacs-init-internal-environment)
   (dotemacs-init-external-environment)
@@ -113,6 +114,10 @@
   (package-initialize)
   ; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+  t)
+
+(defun dotemacs-init-load-packages ()
+  (require-or-install 'feature-mode)
   t)
 
 (defun dotemacs-init-utils ()
@@ -598,8 +603,9 @@
   (defun my-web-mode-hook ()
     (setq web-mode-engines-alist
           '(("handlebars"    . "\\.hbs\\'")
-            ("django"    . "\\.djhtml\\'"))
-          )
+            ("django"    . ".*templates/.*html\\'")
+            ("django"    . "\\.djhtml\\'")
+          ))
 
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-css-indent-offset 2)
