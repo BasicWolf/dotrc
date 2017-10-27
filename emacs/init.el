@@ -35,6 +35,7 @@
   (dotemacs-init-plsql)
   (dotemacs-init-rst)
   (dotemacs-init-web)
+  (dotemacs-init-xml)
   ; (dotemacs-init-c)
   ; (dotemacs-init-c++)
   (dotemacs-init-rust)
@@ -265,9 +266,9 @@
   (sp-pair "\"" "\"" :wrap "C-\"")
 
   ;; Fonts
-  (add-to-list 'default-frame-alist '(font . "Hack 12"))
-  (set-face-attribute 'default nil :font "Hack 12")
-  (set-face-attribute 'font-lock-comment-face nil :font "Ubuntu Mono 13" :foreground "Firebrick")
+  (add-to-list 'default-frame-alist '(font . "Hack 10"))
+  (set-face-attribute 'default nil :font "Hack 10")
+  (set-face-attribute 'font-lock-comment-face nil :font "Ubuntu Mono 11" :foreground "Firebrick")
 
   ;; smart minibuffer: either ido or icicles
   (require-or-install 'flx-ido)
@@ -618,7 +619,11 @@
   (add-to-list 'auto-mode-alist '("\\.handlebars" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.hbs" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml" . web-mode))
-t)
+  t)
+
+(defun dotemacs-init-xml ()
+  (setq nxml-child-indent 4 nxml-attribute-indent 4)
+  t)
 
 (defun dotemacs-init-org ()
   (setq org-todo-keywords
