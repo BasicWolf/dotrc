@@ -17,6 +17,7 @@
   (dotemacs-init-load-path)
   (dotemacs-init-for-debian)
   (dotemacs-init-package-archives)
+  (dotemacs-init-load-packages)
   (dotemacs-init-utils)
   (dotemacs-init-internal-environment)
   (dotemacs-init-external-environment)
@@ -34,17 +35,18 @@
   (dotemacs-init-plsql)
   (dotemacs-init-rst)
   (dotemacs-init-web)
+  (dotemacs-init-xml)
   ; (dotemacs-init-c)
   ; (dotemacs-init-c++)
   (dotemacs-init-rust)
   ; (dotemacs-init-latex)
   ; (dotemacs-init-scala)
 
-  ;; other modes
+  ;; ;; other modes
   (dotemacs-init-dired)
   (dotemacs-init-org)
 
-  (dotemacs-init-overrides)
+  ;; (dotemacs-init-overrides)
   (message "Main complete")
   t)
 ;; ************************************************************************** ;;
@@ -113,6 +115,10 @@
   (package-initialize)
   ; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+  t)
+
+(defun dotemacs-init-load-packages ()
+  (require-or-install 'feature-mode)
   t)
 
 (defun dotemacs-init-utils ()
@@ -260,9 +266,9 @@
   (sp-pair "\"" "\"" :wrap "C-\"")
 
   ;; Fonts
-  (add-to-list 'default-frame-alist '(font . "Hack 12"))
-  (set-face-attribute 'default nil :font "Hack 12")
-  (set-face-attribute 'font-lock-comment-face nil :font "Ubuntu Mono 13" :foreground "Firebrick")
+  (add-to-list 'default-frame-alist '(font . "Hack 10"))
+  (set-face-attribute 'default nil :font "Hack 10")
+  (set-face-attribute 'font-lock-comment-face nil :font "Ubuntu Mono 11" :foreground "Firebrick")
 
   ;; smart minibuffer: either ido or icicles
   (require-or-install 'flx-ido)
@@ -289,6 +295,11 @@
   (setq projectile-globally-ignored-files
         (append '("*.gz" "*.pyc" "*.pyo" "*.jar" "*.tar.gz" "*.tgz" "*.zip")
                 projectile-globally-ignored-files))
+
+  ; temporal projectile workaround for slow-rendering buffers
+  (setq projectile-mode-line
+        '(:eval (format " Projectile[%s]"
+                        (projectile-project-name))))
 
   ;; flycheck
   (require-or-install 'flycheck)
@@ -395,7 +406,7 @@
     (require 'bytecomp)
     (if (numberp (string-match "\\.el" buffer-file-name))
         (byte-compile-file (buffer-file-name))))
-  (add-hook 'after-save-hook 'autocompile)
+  ;; (add-hook 'after-save-hook 'autocompile)
 
   (defun my-elisp-mode-hook ()
     (smartparens-mode))
@@ -435,7 +446,7 @@
     (setq jedi:complete-on-dot t)
     (jedi:setup)
     (ac-flyspell-workaround)
-    
+
     (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
     (define-key python-mode-map (kbd "C-c .") 'jedi:goto-definition)
     (define-key python-mode-map (kbd "C-c d") 'python-toggle-pudb)
@@ -598,8 +609,9 @@
   (defun my-web-mode-hook ()
     (setq web-mode-engines-alist
           '(("handlebars"    . "\\.hbs\\'")
-            ("django"    . "\\.djhtml\\'"))
-          )
+            ("django"    . ".*templates/.*html\\'")
+            ("django"    . "\\.djhtml\\'")
+          ))
 
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-css-indent-offset 2)
@@ -612,7 +624,11 @@
   (add-to-list 'auto-mode-alist '("\\.handlebars" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.hbs" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml" . web-mode))
-t)
+  t)
+
+(defun dotemacs-init-xml ()
+  (setq nxml-child-indent 4 nxml-attribute-indent 4)
+  t)
 
 (defun dotemacs-init-org ()
   (setq org-todo-keywords
