@@ -42,11 +42,11 @@
   ; (dotemacs-init-latex)
   ; (dotemacs-init-scala)
 
-  ;; other modes
+  ;; ;; other modes
   (dotemacs-init-dired)
   (dotemacs-init-org)
 
-  (dotemacs-init-overrides)
+  ;; (dotemacs-init-overrides)
   (message "Main complete")
   t)
 ;; ************************************************************************** ;;
@@ -296,6 +296,11 @@
         (append '("*.gz" "*.pyc" "*.pyo" "*.jar" "*.tar.gz" "*.tgz" "*.zip")
                 projectile-globally-ignored-files))
 
+  ; temporal projectile workaround for slow-rendering buffers
+  (setq projectile-mode-line
+        '(:eval (format " Projectile[%s]"
+                        (projectile-project-name))))
+
   ;; flycheck
   (require-or-install 'flycheck)
   (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -401,7 +406,7 @@
     (require 'bytecomp)
     (if (numberp (string-match "\\.el" buffer-file-name))
         (byte-compile-file (buffer-file-name))))
-  (add-hook 'after-save-hook 'autocompile)
+  ;; (add-hook 'after-save-hook 'autocompile)
 
   (defun my-elisp-mode-hook ()
     (smartparens-mode))
@@ -441,7 +446,7 @@
     (setq jedi:complete-on-dot t)
     (jedi:setup)
     (ac-flyspell-workaround)
-    
+
     (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
     (define-key python-mode-map (kbd "C-c .") 'jedi:goto-definition)
     (define-key python-mode-map (kbd "C-c d") 'python-toggle-pudb)
