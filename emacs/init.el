@@ -404,9 +404,9 @@
   (defun autocompile nil
     (interactive)
     (require 'bytecomp)
-    (if (numberp (string-match "\\.el" buffer-file-name))
+    (if (and (numberp (string-match "\\.el" buffer-file-name)) (not (numberp (string-match "init.el" buffer-file-name))))
         (byte-compile-file (buffer-file-name))))
-  ;; (add-hook 'after-save-hook 'autocompile)
+  (add-hook 'after-save-hook 'autocompile)
 
   (defun my-elisp-mode-hook ()
     (smartparens-mode))
