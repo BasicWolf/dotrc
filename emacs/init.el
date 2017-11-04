@@ -13,7 +13,6 @@
 ;; MAIN
 (defun main ()
   (message "Main started")
-  (dotemacs-init-local)
   (dotemacs-init-load-path)
   (dotemacs-init-for-debian)
   (dotemacs-init-package-archives)
@@ -47,6 +46,8 @@
   (dotemacs-init-org)
 
   ;; (dotemacs-init-overrides)
+  (dotemacs-init-local)
+
   (message "Main complete")
   t)
 ;; ************************************************************************** ;;
@@ -266,9 +267,9 @@
   (sp-pair "\"" "\"" :wrap "C-\"")
 
   ;; Fonts
-  (add-to-list 'default-frame-alist '(font . "Hack 10"))
-  (set-face-attribute 'default nil :font "Hack 10")
-  (set-face-attribute 'font-lock-comment-face nil :font "Ubuntu Mono 11" :foreground "Firebrick")
+  (add-to-list 'default-frame-alist '(font . "Hack 13"))
+  (set-face-attribute 'default nil :font "Hack 13")
+  (set-face-attribute 'font-lock-comment-face nil :font "Ubuntu Mono 12" :foreground "Firebrick")
 
   ;; smart minibuffer: either ido or icicles
   (require-or-install 'flx-ido)
