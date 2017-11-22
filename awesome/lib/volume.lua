@@ -12,7 +12,7 @@ local string   = string
 local config   = config
 local timer = timer
 
-module("zawesome/volume")
+local module = {};
 
 
 -- Color constants
@@ -30,8 +30,6 @@ function set_default_sink()
    sink_id = fd:read("*line")
    fd:close()
 end
-
-
 
 
 -- Functions to fetch volume information (pulseaudio)
@@ -87,25 +85,25 @@ function update_volume(widget)
 end
 
 -- Volume control functions for external use
-function inc_volume(widget)
+function module.inc_volume(widget)
    local cmd = string.format("pactl set-sink-volume %s +5%%", sink_id)
    awful.util.spawn(cmd, false)
    update_volume(widget)
 end
 
-function dec_volume(widget)
+function module.dec_volume(widget)
    local cmd = string.format("pactl set-sink-volume %s -3%%", sink_id)
    awful.util.spawn(cmd, false)
    update_volume(widget)
 end
 
-function mute_volume(widget)
+function module.mute_volume(widget)
    local cmd = string.format("pactl set-sink-mute %s", sink_id)
    awful.util.spawn(cmd, false)
    update_volume(widget)
 end
 
-function create_volume_widget()
+function module.create_volume_widget()
    -- Define volume widget
 
    volume_widget = awful.widget.progressbar()
@@ -128,3 +126,6 @@ function create_volume_widget()
 
    return volume_widget, wrapper_widget
 end
+
+
+return module;

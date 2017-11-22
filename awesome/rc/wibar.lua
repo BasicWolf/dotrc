@@ -3,7 +3,8 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local wibox = require("wibox")
 
-local volume = loadrc("volume", "zawesome/volume")
+local volume = require("../lib/volume");
+
 loadrc("cpuwidget", "zawesome/cpuwidget")
 
 --- TAGS ---
@@ -19,7 +20,6 @@ tags = {
       config.layouts[1] -- various
    }
 }
-
 
 
 

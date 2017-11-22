@@ -19,4 +19,4 @@ loadrc("bindings")
 loadrc("rules")
 loadrc("signals")
 
-loadrc("autostart")
+-- loadrc("autostart")

@@ -1,7 +1,8 @@
-local volume = loadrc("volume", "zawesome/volume")
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local menubar = require("menubar")
+
+local volume = require("../lib/volume");
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
