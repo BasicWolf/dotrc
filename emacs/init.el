@@ -316,8 +316,6 @@
   (global-set-key (kbd "C-h") 'delete-backward-char)
 
   (global-set-key (kbd "C-x w d") 'delete-trailing-whitespace)
-  (global-set-key (kbd "C-c c") 'comment-region)
-  (global-set-key (kbd "C-c u") 'uncomment-region)
   (global-set-key (kbd "C-x C-M-r") 'revert-buffer)
   (global-set-key (kbd "C-c i") 'ido-goto-symbol)
 
