@@ -315,7 +315,7 @@
 (defun dotemacs-init-global-key-bindings ()
   (global-set-key (kbd "C-?") 'help-command)
   (global-set-key (kbd "C-h") 'delete-backward-char)
-  (global-set-key (kbd "C-x C-;") 'comment-region)
+  (global-set-key (kbd "C-x C-;") 'comment-or-uncomment-region)
   (global-set-key (kbd "C-x w d") 'delete-trailing-whitespace)
   (global-set-key (kbd "C-x C-M-r") 'revert-buffer)
   (global-set-key (kbd "C-c i") 'ido-goto-symbol)
