@@ -1,85 +1,81 @@
 #    -*- mode: shell-script -*-
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-SCRIPT_DIR=$(dirname "$0:A")
+# Path to your oh-my-zsh installation.
+  export ZSH=/home/zaur/.oh-my-zsh
 
-# History configuration
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt EXTENDED_HISTORY          # saves the time when the command was started and how long it ran for
-setopt INC_APPEND_HISTORY        # each line is added to the history in this way as it is executed
-setopt HIST_EXPIRE_DUPS_FIRST    # expire duplicate entries first when trimming history
-setopt HIST_IGNORE_DUPS          # don't record an entry that was just recorded again
-setopt HIST_IGNORE_ALL_DUPS      # delete old recorded entry if new entry is a duplicate.
-setopt HIST_FIND_NO_DUPS         # do not display a line previously found
-setopt HIST_IGNORE_SPACE         # don't record an entry starting with a space.
-setopt HIST_SAVE_NO_DUPS         # don't write duplicate entries in the history file
-setopt HIST_REDUCE_BLANKS        # remove superfluous blanks before recording entry
-setopt HIST_VERIFY               # don't execute immediately upon history expansion
-setopt HIST_BEEP                 # beep when accessing nonexistent history
-setopt SHARE_HISTORY             # share history between all sessions
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/root/.zshrc'
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-### EARLY HACKS ###
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# GREP_OPTIONS fix
-alias grep="/usr/bin/grep $GREP_OPTIONS"
-unset GREP_OPTIONS
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-### END OF EARLY HACKS ###
+# Uncomment the following line to change how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=21
 
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-#=== Packages ===#
-# virtualenvwrapper
-WORKON_HOME=~/.virtualenvs
-[[ -a /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]] &&
-    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh;
-[[ -a /usr/bin/virtualenvwrapper.sh ]] &&
-    source /usr/bin/virtualenvwrapper.sh;
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-# NPM packages in homedir
-NPM_PACKAGES="$HOME/.npm-packages"
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Contribs
-fpath=($SCRIPT_DIR/contrib $fpath)
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+HIST_STAMPS="yyyy-mm-dd"
 
-    alias ls='ls --color'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+    django
+    git
+    history
+    mercurial
+)
 
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
-bindkey "^?" backward-delete-char
-bindkey "^[[3~" delete-char
+source $ZSH/oh-my-zsh.sh
 
 
-PROMPT="%n@%m:%~%# "
+# ===================
+# User  configuration
 
-MY_PATH=/home/zaur/.local/bin:$SCRIPT_DIR/../git/bin
-PATH=$PATH:$MY_PATH
+export MANPATH="/usr/local/man:$MANPATH"
 
-
-# KeyChain for storing SSH passwords
-eval `keychain --eval --agents ssh id_rsa`
-
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
 
 #=== Aliases and EDITOR ===#
 export ALTERNATE_EDITOR=""
@@ -87,9 +83,7 @@ export EDITOR="emacs -nw -q"
 
 alias hgs="hg summary && hg stat"
 alias grep="grep --exclude-dir='.hg' --exclude-dir='.build'"
+alias emq="emacs -nw -q"
 
-alias ls='ls -h --color'
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
-
+# KeyChain for storing SSH passwords
+eval `keychain --eval --agents ssh id_rsa`

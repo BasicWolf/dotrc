@@ -1,0 +1,93 @@
+SCRIPT_DIR=$(dirname "$0:A")
+
+# History configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt EXTENDED_HISTORY          # saves the time when the command was started and how long it ran for
+setopt INC_APPEND_HISTORY        # each line is added to the history in this way as it is executed
+setopt HIST_EXPIRE_DUPS_FIRST    # expire duplicate entries first when trimming history
+setopt HIST_IGNORE_DUPS          # don't record an entry that was just recorded again
+setopt HIST_IGNORE_ALL_DUPS      # delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # do not display a line previously found
+setopt HIST_IGNORE_SPACE         # don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # don't write duplicate entries in the history file
+setopt HIST_REDUCE_BLANKS        # remove superfluous blanks before recording entry
+setopt HIST_VERIFY               # don't execute immediately upon history expansion
+setopt HIST_BEEP                 # beep when accessing nonexistent history
+setopt SHARE_HISTORY             # share history between all sessions
+
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/root/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+### EARLY HACKS ###
+
+# GREP_OPTIONS fix
+alias grep="/usr/bin/grep $GREP_OPTIONS"
+unset GREP_OPTIONS
+
+### END OF EARLY HACKS ###
+
+
+#=== Packages ===#
+# virtualenvwrapper
+WORKON_HOME=~/.virtualenvs
+[[ -a /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]] &&
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh;
+[[ -a /usr/bin/virtualenvwrapper.sh ]] &&
+    source /usr/bin/virtualenvwrapper.sh;
+
+# NPM packages in homedir
+NPM_PACKAGES="$HOME/.npm-packages"
+
+# Contribs
+fpath=($SCRIPT_DIR/contrib $fpath)
+
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias ls='ls --color'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+bindkey "^?" backward-delete-char
+bindkey "^[[3~" delete-char
+
+
+PROMPT="%n@%m:%~%# "
+
+MY_PATH=/home/zaur/.local/bin:$SCRIPT_DIR/../git/bin
+PATH=$PATH:$MY_PATH
+
+
+# KeyChain for storing SSH passwords
+eval `keychain --eval --agents ssh id_rsa`
+
+
+#=== Aliases and EDITOR ===#
+export ALTERNATE_EDITOR=""
+export EDITOR="emacs -nw -q"
+
+alias hgs="hg summary && hg stat"
+alias grep="grep --exclude-dir='.hg' --exclude-dir='.build'"
+
+alias ls='ls -h --color'
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
+
