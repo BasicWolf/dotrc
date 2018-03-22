@@ -25,12 +25,11 @@
   (dotemacs-init-global-key-bindings)
 
   ;; programming modes
-  (dotemacs-init-cedet)
+  ;; (dotemacs-init-cedet)
   (dotemacs-init-compilation)
   (dotemacs-init-elisp)
   (dotemacs-init-python)
   (dotemacs-init-javascript)
-  (dotemacs-init-coffeescript)
   (dotemacs-init-plsql)
   (dotemacs-init-rst)
   (dotemacs-init-web)
@@ -58,7 +57,6 @@
 ;; definitions for byte-compilation without warnings
 (defvar c-basic-offset)
 (defvar c-default-style)
-(defvar coffee-mode-map)
 (defvar jedi:complete-on-dot)
 (defvar js2-mode-map)
 (defvar python-mode-map)
@@ -79,6 +77,7 @@
 ;; HELPERS
 (defun require-or-install (package-name)
   (unless (require (quote package-name) nil 'noerror)
+    (message (symbol-name 'package-name))
     (package-install package-name)
     (require package-name)))
 
@@ -177,6 +176,7 @@
 (defun dotemacs-init-ui ()
   ;; theme
   ;; solarized
+  ; (require-or-install 'solarized-theme)
   (setq solarized-distinct-fringe-background t)
   (setq solarized-use-variable-pitch nil)
   (setq solarized-use-less-bold t)
@@ -186,7 +186,7 @@
   (load-theme 'solarized-light t)
 
   (menu-bar-mode 1)
-  (tool-bar-mode 0)
+  (tool-bar-mode -1)
   ; (scroll-bar-mode -1)
   (setq inhibit-startup-message t)        ;; hide startup message (splash screen)
   (setq overflow-newline-into-fringe 1)   ;; enable horizontal line overflow
@@ -196,7 +196,7 @@
   (setq frame-title-format '(buffer-file-name "%f" ("%b"))) ;; change emacs window title
 
   ;; tabbar tabs in emacs (global)
-  (require 'tabbar)
+  (require-or-install 'tabbar)
   (tabbar-mode t)
   (global-set-key (kbd "M-<up>")       'tabbar-backward-tab)
   (global-set-key (kbd "M-<down>")     'tabbar-forward-tab)
@@ -340,7 +340,7 @@
 (defun dotemacs-init-cedet ()
   ;; Semantic
   (semantic-mode 1)
-  (global-ede-mode 1)
+  ;; (global-ede-mode 1)
 
   (global-semantic-idle-completions-mode)
   (global-semantic-idle-summary-mode)
@@ -358,7 +358,7 @@
   (require 'semantic/util)
   (require 'eassist)
 
-  (setq semanticdb-default-save-directory (concat var-dir "semanticdb"))1
+  (setq semanticdb-default-save-directory (concat var-dir "semanticdb"))
   t)
 
 
@@ -480,20 +480,6 @@
   t)
 
 
-(defun dotemacs-init-coffeescript ()
-  (defun coffee-toggle-debugger()
-    "Insert `debugger` at cursor point."
-    (interactive)
-    (insert "debugger"))
-
-  (defun my-coffee-mode-hook ()
-    (smartparens-mode)
-    (define-key coffee-mode-map (kbd "C-c d") 'coffee-toggle-debugger))
-
-  (add-hook 'coffee-mode-hook 'my-coffee-mode-hook)
-  t)
-
-
 (defun dotemacs-init-rust ()
   (require-or-install 'company-racer)
   (require-or-install 'racer)
@@ -584,7 +570,7 @@
 
 (defun dotemacs-init-plsql ()
   (load "indent_sql.el")
-  (require-or-install 'plsql)
+  (load "plsql")
 
   (defun my-plsql-mode-hook ()
     (setq indent-line-function 'ig-indent-sql))
@@ -641,8 +627,10 @@
     (org-clock-persistence-insinuate)
 
     (org-indent-mode t)
-    (global-set-key (kbd "<C-c l>") 'org-store-link)
-    (global-set-key (kbd "<C-c a>") 'org-agenda)
+
+    (global-set-key (kbd "C-c .") 'org-time-stamp)
+    (global-set-key (kbd "C-c l") 'org-store-link)
+    (global-set-key (kbd "C-c a") 'org-agenda)
     t)
   (add-hook 'org-mode-hook  'my-org-mode-hook)
   t)
@@ -654,3 +642,17 @@
   t)
 
 (main)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (rust-mode tabbar solarized-theme smartparens racer projectile flycheck-rust flx-ido feature-mode company-racer))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
