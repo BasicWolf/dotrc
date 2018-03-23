@@ -55,6 +55,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# ==== EARLY PLUGINS CONFIGURATION ==== #
+WORKON_HOME="~/.virtualenvs"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -64,6 +67,7 @@ plugins=(
     git
     history
     mercurial
+    virtualenvwrapper
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -77,6 +81,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+
 #=== Aliases and EDITOR ===#
 export ALTERNATE_EDITOR=""
 export EDITOR="emacs -nw -q"
@@ -85,5 +90,9 @@ alias hgs="hg summary && hg stat"
 alias grep="grep --exclude-dir='.hg' --exclude-dir='.build'"
 alias emq="emacs -nw -q"
 
+
 # KeyChain for storing SSH passwords
 eval `keychain --eval --agents ssh id_rsa`
+
+
+source ~/.zshrc.local
