@@ -93,6 +93,3 @@ alias emq="emacs -nw -q"
 
 # KeyChain for storing SSH passwords
 eval `keychain --eval --agents ssh id_rsa`
-
-
-source ~/.zshrc.local

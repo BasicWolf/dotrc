@@ -309,6 +309,11 @@
 
   ;; i-search
   (setq case-fold-search 1)
+
+  ;; minimap
+  (require-or-install 'minimap)
+  (setq minimap-hide-scroll-bar nil)
+  (setq minimap-window-location 'right)
   t)
 
 
@@ -488,7 +493,7 @@
 
   (setq company-racer-executable (f-expand "~/.cargo/bin/racer"))
   (unless (getenv "RUST_SRC_PATH")
-    (setenv "RUST_SRC_PATH" (f-expand "~/.local/all/rust-src/src")))
+    (setenv "RUST_SRC_PATH" (f-expand "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/../lib/rustlib/src/rust/src/")))
 
   (defun my-rust-mode-hook ()
     (require 'smartparens-rust)
