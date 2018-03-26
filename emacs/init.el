@@ -629,6 +629,8 @@
     (setq org-log-done t)
 
     (setq org-clock-persist 'history)
+    (setq calendar-week-start-day 1)
+
     (org-clock-persistence-insinuate)
 
     (org-indent-mode t)
