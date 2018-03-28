@@ -39,7 +39,8 @@
   (dotemacs-init-rust)
   ; (dotemacs-init-latex)
   ; (dotemacs-init-scala)
-
+  (dotemacs-init-mapserver)
+  
   ;; ;; other modes
   (dotemacs-init-dired)
   (dotemacs-init-org)
@@ -617,10 +618,18 @@
   (add-to-list 'auto-mode-alist '("\\.djhtml" . web-mode))
   t)
 
+
 (defun dotemacs-init-xml ()
   (setq nxml-child-indent 4 nxml-attribute-indent 4)
   t)
 
+
+(defun dotemacs-init-mapserver ()
+  (autoload 'mapserver-mode "mapserver-mode" "Mode for editing UMN MapServer files." t)
+  (add-to-list 'auto-mode-alist '("\\.map\\'" . mapserver-mode))
+  t)
+
+ 
 (defun dotemacs-init-org ()
   (setq org-todo-keywords
         '((sequence "TODO(t)" "WAIT(w@/!)" "IN PROGRESS(p!)" "|" "DONE(d!)" "CANCELED(c@)")))
