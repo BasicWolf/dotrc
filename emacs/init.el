@@ -25,7 +25,7 @@
   (dotemacs-init-global-key-bindings)
 
   ;; programming modes
-  ;; (dotemacs-init-cedet)
+  (dotemacs-init-cedet)
   (dotemacs-init-compilation)
   (dotemacs-init-elisp)
   (dotemacs-init-python)
@@ -644,9 +644,9 @@
 
     (org-indent-mode t)
 
-    (global-set-key (kbd "C-c .") 'org-time-stamp)
-    (global-set-key (kbd "C-c l") 'org-store-link)
-    (global-set-key (kbd "C-c a") 'org-agenda)
+    (define-key ord-mode-map (kbd "C-c .") 'org-time-stamp)
+    (define-key ord-mode-map (kbd "C-c l") 'org-store-link)
+    (define-key ord-mode-map (kbd "C-c a") 'org-agenda)
     t)
   (add-hook 'org-mode-hook  'my-org-mode-hook)
   t)
