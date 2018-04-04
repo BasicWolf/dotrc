@@ -40,7 +40,7 @@
   ; (dotemacs-init-latex)
   ; (dotemacs-init-scala)
   (dotemacs-init-mapserver)
-  
+
   ;; ;; other modes
   (dotemacs-init-dired)
   (dotemacs-init-org)
@@ -422,20 +422,50 @@
 
 
 (defun dotemacs-init-python ()
-  (declare-function python-shell-calculate-exec-path "python")
-
-  (defalias 'workon 'pyvenv-workon)
+  (defalias 'workon 'venv-workon)
 
   (defun flycheck-virtualenv-executable-find (executable)
     "Find an EXECUTABLE in the current virtualenv if any."
-    (if (bound-and-true-p python-shell-virtualenv-root)
+    (if (bound-and-true-p python-shell-virtualenv-path)
         (let ((exec-path (python-shell-calculate-exec-path)))
           (executable-find executable))
       (executable-find executable)))
-
+  
   (defun flycheck-virtualenv-setup ()
     "Setup Flycheck for the current virtualenv."
     (setq-local flycheck-executable-find #'flycheck-virtualenv-executable-find))
+
+  (defun project-directory (buffer-name)
+    "Return the root directory of the project that contain the
+given BUFFER-NAME. Any directory with a .jedi file/directory
+is considered to be a project root."
+    (interactive)
+    (let ((root-dir (file-name-directory buffer-name)))
+      (while (and root-dir
+                  ;(not (file-exists-p (concat root-dir ".git")))
+                  ;(not (file-exists-p (concat root-dir ".hg")))
+                  (not (file-exists-p (concat root-dir ".jedi"))))
+        (setq root-dir
+              (if (equal root-dir "/")
+                  nil
+                (file-name-directory (directory-file-name root-dir)))))
+      root-dir))
+
+  (defun project-name (buffer-name)
+    "Return the name of the project that contain the given BUFFER-NAME."
+    (let ((root-dir (project-directory buffer-name)))
+      (if root-dir
+          (file-name-nondirectory
+           (directory-file-name root-dir))
+        nil)))
+
+  (defun jedi-setup-venv ()
+    "Activates the virtualenv of the current buffer."
+    (let ((project-name (project-name buffer-file-name)))
+      (when project-name (venv-workon project-name))))
+
+  (setq jedi:setup-keys t)
+  (setq jedi:complete-on-dot t)
 
   (defun my-python-mode-hook ()
     (flycheck-virtualenv-setup)
@@ -449,7 +479,7 @@
 
     (define-key python-mode-map (kbd "M-m") 'eassist-list-methods)
 
-    (setq jedi:complete-on-dot t)
+    (jedi-setup-venv)
     (jedi:setup)
     (ac-flyspell-workaround)
 
@@ -629,7 +659,7 @@
   (add-to-list 'auto-mode-alist '("\\.map\\'" . mapserver-mode))
   t)
 
- 
+
 (defun dotemacs-init-org ()
   (setq org-todo-keywords
         '((sequence "TODO(t)" "WAIT(w@/!)" "IN PROGRESS(p!)" "|" "DONE(d!)" "CANCELED(c@)")))
