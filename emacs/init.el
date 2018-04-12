@@ -485,7 +485,7 @@ is considered to be a project root."
 
     (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
     (define-key python-mode-map (kbd "C-c .") 'jedi:goto-definition)
-    (define-key python-mode-map (kbd "C-c d") 'python-toggle-pudb)
+    (define-key python-mode-map (kbd "C-c C-d") 'python-toggle-pudb)
     t)
 
   (defun python-toggle-pudb()
