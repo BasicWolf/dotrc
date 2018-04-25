@@ -373,16 +373,15 @@
   (setq mode-compile-always-save-buffer-p t)
   (setq compilation-scroll-output t)
 
-  ;; TODO: put this somewhere else
-  (setq compilation-finish-functions
-        (lambda (buf str)
-          ;; we don't want to close "grep" automatically
-          (unless (string-equal "*grep*" (buffer-name buf))
-            (unless (string-match "exited abnormally" str)
-              ;; no errors, make the compilation window go away in a few seconds
-              (run-at-time
-               "1 sec" nil 'winner-undo) ;; uses winner-mode
-              (message "No Compilation Errors!")))))
+  ;; (setq compilation-finish-functions
+  ;;       (lambda (buf str)
+  ;;         ;; we don't want to close "grep" automatically
+  ;;         (unless (string-equal "*grep*" (buffer-name buf))
+  ;;           (unless (string-match "exited abnormally" str)
+  ;;             ;; no errors, make the compilation window go away in a few seconds
+  ;;             (run-at-time
+  ;;              "1 sec" nil 'winner-undo) ;; uses winner-mode
+  ;;             (message "No Compilation Errors!")))))
   t)
 
 
@@ -422,6 +421,7 @@
 
 
 (defun dotemacs-init-python ()
+  (require-or-install 'virtualenvwrapper)
   (defalias 'workon 'venv-workon)
 
   (defun flycheck-virtualenv-executable-find (executable)
@@ -430,7 +430,7 @@
         (let ((exec-path (python-shell-calculate-exec-path)))
           (executable-find executable))
       (executable-find executable)))
-  
+
   (defun flycheck-virtualenv-setup ()
     "Setup Flycheck for the current virtualenv."
     (setq-local flycheck-executable-find #'flycheck-virtualenv-executable-find))
@@ -470,6 +470,8 @@ is considered to be a project root."
   (defun my-python-mode-hook ()
     (flycheck-virtualenv-setup)
 
+    (add-to-list 'company-backends 'company-jedi)
+
     (which-function-mode t)
     ;; spell check only strings/comments when in Python mode:
     (flyspell-prog-mode)
@@ -478,14 +480,14 @@ is considered to be a project root."
     (smartparens-mode)
 
     (define-key python-mode-map (kbd "M-m") 'eassist-list-methods)
+    (define-key python-mode-map (kbd "C-c C-d") 'python-toggle-pudb)
 
     (jedi-setup-venv)
     (jedi:setup)
-    (ac-flyspell-workaround)
+    ; (ac-flyspell-workaround)
 
     (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
     (define-key python-mode-map (kbd "C-c .") 'jedi:goto-definition)
-    (define-key python-mode-map (kbd "C-c C-d") 'python-toggle-pudb)
     t)
 
   (defun python-toggle-pudb()
@@ -521,6 +523,7 @@ is considered to be a project root."
   (require-or-install 'racer)
   (require-or-install 'flycheck-rust)
   (require-or-install 'rust-mode)
+  (require-or-install 'cargo)
 
   (setq company-racer-executable (f-expand "~/.cargo/bin/racer"))
   (unless (getenv "RUST_SRC_PATH")
@@ -558,6 +561,7 @@ is considered to be a project root."
     (define-key c-mode-base-map (kbd "M-h") 'mark-defun))
   (add-hook 'c-mode-common-hook 'my-c-mode-hook-binds)
   t)
+
 
 
 (defun dotemacs-init-c++ ()
@@ -599,10 +603,12 @@ is considered to be a project root."
   (add-hook 'LaTeX-mode-hook 'my-latex-mode-hook t)
   t)
 
+
 (defun dotemacs-init-scala ()
   (require 'ensime)
   (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
   t)
+
 
 (defun dotemacs-init-plsql ()
   (load "indent_sql.el")
@@ -617,6 +623,7 @@ is considered to be a project root."
          '(("\\.\\(p\\(?:k[bg]\\|ls\\)\\|sql\\)\\'" . plsql-mode))
          auto-mode-alist))
   t)
+
 
 (defun dotemacs-init-rst ()
   (defun my-rst-mode-hook ()
@@ -674,9 +681,9 @@ is considered to be a project root."
 
     (org-indent-mode t)
 
-    (define-key ord-mode-map (kbd "C-c .") 'org-time-stamp)
-    (define-key ord-mode-map (kbd "C-c l") 'org-store-link)
-    (define-key ord-mode-map (kbd "C-c a") 'org-agenda)
+    (define-key org-mode-map (kbd "C-c .") 'org-time-stamp)
+    (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+    (define-key org-mode-map (kbd "C-c a") 'org-agenda)
     t)
   (add-hook 'org-mode-hook  'my-org-mode-hook)
   t)
