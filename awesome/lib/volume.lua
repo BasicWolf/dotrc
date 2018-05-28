@@ -106,11 +106,12 @@ end
 function module.create_volume_widget()
    -- Define volume widget
 
-   volume_widget = awful.widget.progressbar()
+   volume_widget = wibox.widget.progressbar()
    -- volume_widget:set_width(8)
    -- volume_widget:set_vertical(true)
    volume_widget:set_border_color('#666666')
-
+   volume_widget:connect_signal("button::press", function() awful.util.spawn("pavucontrol"); end)
+   
    wrapper_widget = wibox.widget {
       volume_widget,
       forced_height = 100,
