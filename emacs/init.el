@@ -256,11 +256,8 @@
           (bury-buffer)
         ad-do-it)))
 
-  ;; lines' numbers (!requres nlinum from ELPA)
-  ;; !!! nlinum is currently broken, using linum
-  ;(require-or-install 'nlinum)
-  ;(global-nlinum-mode 1)
-  (global-linum-mode)
+  ; (global-linum-mode 0) ; Emacs 25 and older
+  (global-display-line-numbers-mode)
 
   ;; !requires smartparens from ELPA
   (require-or-install 'smartparens)
