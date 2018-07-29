@@ -661,6 +661,7 @@ is considered to be a project root."
 (defun dotemacs-init-mapserver ()
   (autoload 'mapserver-mode "mapserver-mode" "Mode for editing UMN MapServer files." t)
   (add-to-list 'auto-mode-alist '("\\.map\\'" . mapserver-mode))
+  (add-to-list 'auto-mode-alist '("\\.inc\\'" . mapserver-mode))
   t)
 
 

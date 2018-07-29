@@ -8,14 +8,14 @@
 ;;
 ;; Modified version of Hal Muellers mapserver-mode.
 ;; Forked from: https://github.com/halmueller/mapserver-emacs-mode
-;; 
+;;
 ;; Adjusted to mapserver 6.4.1.
-;; 
+;;
 ;; The original file seems to be based on the Mode Tutorial by Scott Andrew
 ;; Borton at http://www.emacswiki.org/emacs/ModeTutorial. See also the
 ;; Sample Major Mode example by Stefan Monnier at
 ;; http://www.emacswiki.org/emacs/SampleMode.
-;; 
+;;
 ;;
 ;; INSTALLATION
 ;; ------------
@@ -38,7 +38,7 @@
 ;; Some help for Emacs is available at the [[http://www.emacswiki.org/][Emacs Wiki]].
 ;;
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;; Author: Hal Mueller <hal@mobilegeographics.com>
 ;; Created: 22 May 2004
 ;; Keywords: MapServer major-mode
@@ -82,7 +82,7 @@
   (list
    ;; These define the beginning and end of each MapServer entity definition
    '("\\<\\(C\\(?:L\\(?:ASS\\|USTER\\)\\|OMPOSITE\\)\\|END\\|FEATURE\\|GRID\\|JOIN\\|L\\(?:A\\(?:BEL\\|YER\\)\\|E\\(?:ADER\\|GEND\\)\\)\\|M\\(?:AP\\|ETADATA\\)\\|PROJECTION\\|QUERYMAP\\|REFERENCE\\|S\\(?:CALEBAR\\|TYLE\\|YMBOL\\)\\|VALIDATION\\|WEB\\)\\>" . font-lock-builtin-face)
-   
+
   '("\\('\\w*'\\)" . font-lock-variable-name-face))
   "Minimal highlighting expressions for MapServer mode.")
 
@@ -104,7 +104,7 @@
        ;; AXS
        ;; '("\\<(LINE\\|PO\\(?:INT\\|LYGON\\))\\>" . font-lock-constant-face)))
        '("\\<\\(LINE\\|MULTI\\(?:LINE\\|PO\\(?:INT\\|LYGON\\)\\)\\|O\\(?:FF\\|N\\)\\|PO\\(?:INT\\|LYGON\\)\\|RASTER\\|TRUETYPE\\|angle\\|bbox_pixel_is_point\\|c\\(?:lear\\|o\\(?:lor-\\(?:burn\\|dodge\\)\\|nt\\(?:our\\|rast\\)\\)\\)\\|d\\(?:arken\\|ifference\\|st\\(?:-\\(?:atop\\|in\\|o\\(?:ut\\|ver\\)\\)\\)?\\)\\|e\\(?:mbed\\|xclusion\\)\\|gml_\\(?:\\(?:exclude_item\\|g\\(?:eometrie\\|roup\\)\\|\\(?:include\\|xml\\)_item\\)s\\)\\|hard-light\\|invert\\(?:-rgb\\)?\\|kerneldensity\\|l\\(?:ighten\\|ocal\\)\\|m\\(?:eters\\|inus\\|ultiply\\)\\|o\\(?:gr\\|r\\(?:aclespatial\\)?\\|verlay\\|ws_\\(?:a\\(?:ccessconstraints\\|ddress\\(?:type\\)?\\|llowed_ip_list\\)\\|c\\(?:ity\\|o\\(?:ntact\\(?:electronicmailaddress\\|facsimiletelephone\\|information\\|organization\\|p\\(?:\\(?:ers\\|ositi\\)on\\)\\|voicetelephone\\)\\|untry\\)\\)\\|denied_ip_list\\|enable_request\\|fees\\|http_max_age\\|keywordlist\\|postcode\\|s\\(?:chemas_location\\|ld_enabled\\|tateorprovince\\)\\|updatesequence\\)\\)\\|p\\(?:lu\\(?:gin\\|s\\)\\|ostgis\\)\\|r\\(?:adius\\|l\\)\\|s\\(?:creen\\|de\\|oft-light\\|rc\\(?:-\\(?:atop\\|in\\|o\\(?:ut\\|ver\\)\\)\\)?\\)\\|u\\(?:nion\\|vraster\\|[lr]\\)\\|w\\(?:fs\\|ms\\(?:_\\(?:a\\(?:bstract\\|ccessconstraints\\|ddress\\(?: \\|type\\)\\|llowed_ip_list\\|ttribution_\\(?:logourl_\\(?:format\\|h\\(?:eight\\|ref\\)\\|width\\)\\|\\(?:onlineresourc\\|titl\\)e\\)\\|uthorityurl_\\(?:href\\|name\\)\\)\\|bbox_extended\\|c\\(?:ity\\|o\\(?:ntact\\(?:electronicmailaddress\\|facsimiletelephone\\|organization\\|p\\(?:\\(?:ers\\|ositi\\)on\\)\\|voicetelephone\\)\\|untry\\)\\)\\|d\\(?:ataurl_\\(?:format\\|href\\)\\|enied_ip_list\\)\\|e\\(?:n\\(?:able_request\\|coding\\)\\|x\\(?:clude_items\\|tent\\)\\)\\|fe\\(?:ature_info_mime_type\\|es\\)\\|g\\(?:et\\(?:capabilities_version\\|\\(?:featureinfo\\|legendgraphic\\|map\\)_formatlist\\)\\|roup_\\(?:abstract\\|title\\)\\)\\|i\\(?:dentifier_\\(?:authority\\|value\\)\\|nclude_items\\)\\|keywordlist\\(?:_vocabulary\\)?\\|la\\(?:nguages\\|yer\\(?:_group\\|limit\\)\\)\\|metadataurl_\\(?:format\\|href\\|type\\)\\|o\\(?:\\(?:nlineresourc\\|paqu\\)e\\)\\|postcode\\|r\\(?:e\\(?:mote_sld_max_bytes\\|s[xy]\\)\\|ootlayer_\\(?:abstract\\|keywordlist\\|title\\)\\)\\|s\\(?:ervice_onlineresource\\|rs\\|t\\(?:\\(?:ateorprovinc\\|yl\\)e\\)\\)\\|ti\\(?:me\\(?:default\\|extent\\|format\\|item\\)\\|tle\\)\\)\\)?\\)\\|xor\\)\\>" . font-lock-constant-face)))
-       
+
   "Balls-out highlighting in MapServer mode.")
 
 (defvar mapserver-mode-tab-width 4)
@@ -135,7 +135,7 @@
 		    (setq not-indented nil))
 		;; CLASS FEATURE FONTSET GRID JOIN LAYER LEGEND MAP OUTPUTFORMAT POINTS PROJECTION QUERYMAP REFERENCE SCALEBAR STYLE WEB
 		(if (or (looking-at "^SYMBOL$")
-			(looking-at "^[ \t]*\\(CLASS$\\|COMPOSITE\\|FEATURE\\|FONTSET\\|GRID\\|JOIN\\|LABEL$\\|LAYER\\|LEGEND\\|MAP\\|METADATA\\|OUTPUTFORMAT\\|POINTS\\|PROJECTION\\|QUERYMAP\\|REFERENCE\\|SCALEBAR\\|SYMBOL$\\|SYMBOLSET\\|STYLE\\|WEB\\)"))	; This hint indicates that we need to indent an extra level
+			(looking-at "^[ \t]*\\(CLASS$\\|COMPOSITE\\|FEATURE\\|FONTSET\\|GRID\\|JOIN\\|LABEL$\\|LAYER\\|LEGEND\\|MAP\\|METADATA\\|OUTPUTFORMAT\\|POINTS\\|PROJECTION\\|QUERYMAP\\|REFERENCE\\|SCALEBAR\\|SYMBOL$\\|SYMBOLSET\\|STYLE\\|VALIDATION\\|WEB\\)"))	; This hint indicates that we need to indent an extra level
 		    (progn
 		      (setq cur-indent (+ (current-indentation) mapserver-mode-tab-width)) ; Do the actual indenting
 		      (setq not-indented nil))
@@ -152,7 +152,7 @@
     (modify-syntax-entry ?_ "w" mapserver-mode-syntax-table)
     (modify-syntax-entry ?# "<" mapserver-mode-syntax-table)
     (modify-syntax-entry ?\n ">" mapserver-mode-syntax-table)
-    
+
 
     mapserver-mode-syntax-table)
   "Syntax table for mapserver-mode")
