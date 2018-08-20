@@ -117,33 +117,42 @@
   (beginning-of-line)
   (if (bobp)
       (indent-line-to 0)	   ; First line is always non-indented
-    (let ((not-indented t) cur-indent)
-	(if (looking-at "^[ \t]*END") ; If the line we are looking at is the end of a block, then decrease the indentation
-	    (progn
-	      (save-excursion
-		(forward-line -1)
-		(setq cur-indent (- (current-indentation) mapserver-mode-tab-width)))
-	      (if (< cur-indent 0) ; We can't indent past the left margin
-		  (setq cur-indent 0)))
-	  (save-excursion
-	    (while not-indented	; Iterate backwards until we find an indentation hint
-	      (forward-line -1)
-	      (if (looking-at "^[ \t]*END") ; This hint indicates that we need to indent at the level of the END_ token
-		  (progn
-		    (indent-according-to-mode)
-		    (setq cur-indent (current-indentation))
-		    (setq not-indented nil))
-		;; CLASS FEATURE FONTSET GRID JOIN LAYER LEGEND MAP OUTPUTFORMAT POINTS PROJECTION QUERYMAP REFERENCE SCALEBAR STYLE WEB
-		(if (or (looking-at "^SYMBOL$")
-			(looking-at "^[ \t]*\\(CLASS$\\|COMPOSITE\\|FEATURE\\|FONTSET\\|GRID\\|JOIN\\|LABEL$\\|LAYER\\|LEGEND\\|MAP\\|METADATA\\|OUTPUTFORMAT\\|POINTS\\|PROJECTION\\|QUERYMAP\\|REFERENCE\\|SCALEBAR\\|SYMBOL$\\|SYMBOLSET\\|STYLE\\|VALIDATION\\|WEB\\)"))	; This hint indicates that we need to indent an extra level
-		    (progn
-		      (setq cur-indent (+ (current-indentation) mapserver-mode-tab-width)) ; Do the actual indenting
-		      (setq not-indented nil))
-		  (if (bobp)
-		      (setq not-indented nil)))))))
-    (if cur-indent
-	(indent-line-to cur-indent)
-      (indent-line-to 0))))) ; If we didn't see an indentation hint, then allow no indentation
+    (let ((not-indented t)
+          (case-fold-search nil)
+          cur-indent)
+
+	  (if (looking-at "^[ \t]*END") ; If the line we are looking at is the end of a block, then decrease the indentation
+	      (progn
+	        (save-excursion
+              (forward-line -1)
+              (while (looking-at "[[:space:]]*$")
+		        (forward-line -1))
+		      (setq cur-indent (- (current-indentation) mapserver-mode-tab-width)))
+	        (if (< cur-indent 0) ; We can't indent past the left margin
+		        (setq cur-indent 0)))
+	    (save-excursion
+	      (while not-indented	; Iterate backwards until we find an indentation hint
+	        (forward-line -1)
+	        (if (looking-at "^[ \t]*END") ; This hint indicates that we need to indent at the level of the END_ token
+		        (progn
+		          (indent-according-to-mode)
+		          (setq cur-indent (current-indentation))
+		          (setq not-indented nil))
+
+		      (if
+			      (looking-at "^[ \t]*\\(CLASS$\\|COMPOSITE\\|FEATURE\\|GRID\\|JOIN\\|LABEL$\\|LAYER\\|LEGEND\\|MAP\\|METADATA\\|OUTPUTFORMAT\\|POINTS\\|PROJECTION\\|QUERYMAP\\|REFERENCE\\|SCALEBAR\\|SYMBOL$\\|STYLE\\|VALIDATION\\|WEB\\)")	; This hint indicates that we need to indent an extra level
+		          (progn
+		            (setq cur-indent (+ (current-indentation) mapserver-mode-tab-width)) ; Do the actual indenting
+		            (setq not-indented nil))
+		        (if (bobp)
+		            (setq not-indented nil))))
+            )))
+      (if cur-indent
+	      (progn (indent-line-to cur-indent))
+        (indent-line-to 0))))
+  )
+
+
 
 (defvar mapserver-mode-syntax-table
   (let ((mapserver-mode-syntax-table (make-syntax-table)))
