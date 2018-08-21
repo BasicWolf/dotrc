@@ -490,7 +490,7 @@ is considered to be a project root."
   (defun python-toggle-pudb()
     "Insert import pudb; pu.db at cursor point."
     (interactive)
-    (insert "import pudb; pu.db"))
+    (insert "import pudb.b"))
 
   (add-hook 'python-mode-hook 'my-python-mode-hook)
   t)
