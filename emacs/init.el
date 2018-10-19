@@ -40,7 +40,8 @@
   ; (dotemacs-init-latex)
   ; (dotemacs-init-scala)
   (dotemacs-init-mapserver)
-
+  (dotemacs-init-plantuml)
+  
   ;; ;; other modes
   (dotemacs-init-dired)
   (dotemacs-init-org)
@@ -110,7 +111,6 @@
  Something like 'emacs20, 'xemacs20, etc.")
   t)
 
-
 (defun dotemacs-init-package-archives ()
   (message "calling dotemacs-init-package-archives")
   (require 'package)
@@ -131,13 +131,14 @@
   (load "overrides.el")
   t)
 
+
 (defun dotemacs-init-internal-environment ()
   (add-to-list 'backup-directory-alist (cons "." (concat var-dir "backups/")))
   ; (setq tramp-backup-directory-alist backup-directory-alist)
 
   (setq custom-file dotemacs-custom-file-path)
-  (setq kept-new-versions 6)   ;; Number of newest versions to keep.
-  (setq kept-old-versions 2)   ;; Number of oldest versions to keep.
+  (setq kept-new-versions 8)   ;; Number of newest versions to keep.
+  (setq kept-old-versions 0)   ;; Number of oldest versions to keep.
   (setq version-control t)     ;; Use version numbers for backups.
   (setq delete-old-versions t) ;; Don't ask to delete excess backup versions.
   (setq backup-by-copying t)   ;; Copy all files, don't rename them.
@@ -459,10 +460,11 @@ is considered to be a project root."
   (defun jedi-setup-venv ()
     "Activates the virtualenv of the current buffer."
     (let ((project-name (project-name buffer-file-name)))
-      (when project-name (venv-workon project-name))))
+      (when project-name (venv-workon project-name)))
+    (jedi:setup)
+    (setq jedi:setup-keys t)
+    (setq jedi:complete-on-dot t))
 
-  (setq jedi:setup-keys t)
-  (setq jedi:complete-on-dot t)
 
   (defun my-python-mode-hook ()
     (flycheck-virtualenv-setup)
@@ -480,7 +482,7 @@ is considered to be a project root."
     (define-key python-mode-map (kbd "C-c C-d") 'python-toggle-pudb)
 
     (jedi-setup-venv)
-    (jedi:setup)
+
     ; (ac-flyspell-workaround)
 
     (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
@@ -490,7 +492,7 @@ is considered to be a project root."
   (defun python-toggle-pudb()
     "Insert import pudb; pu.db at cursor point."
     (interactive)
-    (insert "import pudb.b"))
+    (insert "import pudb; pu.db"))
 
   (add-hook 'python-mode-hook 'my-python-mode-hook)
   t)
@@ -664,6 +666,15 @@ is considered to be a project root."
   (add-to-list 'auto-mode-alist '("\\.inc\\'" . mapserver-mode))
   t)
 
+(defun dotemacs-init-plantuml ()
+  ;; active Org-babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(;; other Babel languages
+     (plantuml . t)))
+
+  (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  t)
 
 (defun dotemacs-init-org ()
   (setq org-todo-keywords
