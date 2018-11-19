@@ -9,7 +9,6 @@
 (defvar dotemacs-evening-hours 18)
 (defvar dotemacs-custom-file-path (concat init-dir "custom.el"))
 
-
 ;; MAIN
 (defun main ()
   (message "Main started")
@@ -36,12 +35,12 @@
   (dotemacs-init-xml)
   ; (dotemacs-init-c)
   ; (dotemacs-init-c++)
-  (dotemacs-init-rust)
+  ; (dotemacs-init-rust)
   ; (dotemacs-init-latex)
   ; (dotemacs-init-scala)
   (dotemacs-init-mapserver)
   (dotemacs-init-plantuml)
-  
+
   ;; ;; other modes
   (dotemacs-init-dired)
   (dotemacs-init-org)
@@ -78,10 +77,10 @@
 
 ;; HELPERS
 (defun require-or-install (package-name)
-  (unless (require (quote package-name) nil 'noerror)
-    (message (symbol-name 'package-name))
+  (unless (package-installed-p package-name)
     (package-install package-name)
-    (require package-name)))
+    (require package-name))
+  t)
 
 
 (defun string-from-file (file-path)
@@ -284,6 +283,7 @@
   ;; projectile
   (require-or-install 'projectile)
   (projectile-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-enable-caching t)
   (setq projectile-cache-file (expand-file-name "projectile.cache" var-dir))
   (setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" var-dir))
@@ -711,7 +711,7 @@ is considered to be a project root."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (rust-mode tabbar solarized-theme smartparens racer projectile flycheck-rust flx-ido feature-mode company-racer))))
+    (rust-mode tabbar solarized-theme smartparens racer projectile flycheck-rust flx-ido feature-mode company-racer f))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
