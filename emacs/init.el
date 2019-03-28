@@ -268,7 +268,7 @@
   ;; Fonts
   (add-to-list 'default-frame-alist '(font . "Hack 13"))
   (set-face-attribute 'default nil :font "Hack 13")
-  (set-face-attribute 'font-lock-comment-face nil :font "Ubuntu Mono 12" :foreground "Firebrick")
+  (set-face-attribute 'font-lock-comment-face nil :font "Hack 13" :foreground "Firebrick")
 
   ;; smart minibuffer: either ido or icicles
   (require-or-install 'flx-ido)
@@ -407,7 +407,9 @@
   (defun autocompile nil
     (interactive)
     (require 'bytecomp)
-    (if (and (numberp (string-match "\\.el" buffer-file-name)) (not (numberp (string-match "init.el" buffer-file-name))))
+    (if (and
+         (numberp (string-match "\\.el" buffer-file-name))
+         (not (numberp (string-match "init.el" buffer-file-name))))
         (byte-compile-file (buffer-file-name))))
   (add-hook 'after-save-hook 'autocompile)
 
@@ -465,15 +467,22 @@ is considered to be a project root."
     (setq jedi:setup-keys t)
     (setq jedi:complete-on-dot t))
 
+  (defun python-toggle-pudb()
+    "Insert breakpoint() at cursor point."
+    (interactive)
+    (insert "breakpoint()"))
 
   (defun my-python-mode-hook ()
     (flycheck-virtualenv-setup)
 
+    (company-mode)
     (add-to-list 'company-backends 'company-jedi)
 
     (which-function-mode t)
     ;; spell check only strings/comments when in Python mode:
     (flyspell-prog-mode)
+    (blacken-mode)
+    (setq blacken-skip-string-normalization t)
 
     (require 'smartparens-python)
     (smartparens-mode)
@@ -485,14 +494,10 @@ is considered to be a project root."
 
     ; (ac-flyspell-workaround)
 
-    (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
+    (define-key python-mode-map (kbd "M-<tab>") 'jedi:complete)
     (define-key python-mode-map (kbd "C-c .") 'jedi:goto-definition)
+    (define-key python-mode-map (kbd "C-c C-f") 'jedi:show-doc)
     t)
-
-  (defun python-toggle-pudb()
-    "Insert import pudb; pu.db at cursor point."
-    (interactive)
-    (insert "import pudb; pu.db"))
 
   (add-hook 'python-mode-hook 'my-python-mode-hook)
   t)
