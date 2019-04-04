@@ -29,19 +29,19 @@
   (dotemacs-init-elisp)
   (dotemacs-init-python)
   (dotemacs-init-javascript)
-  (dotemacs-init-plsql)
-  (dotemacs-init-rst)
+  ;; (dotemacs-init-plsql)
+  ;; (dotemacs-init-rst)
   (dotemacs-init-web)
   (dotemacs-init-xml)
-  ; (dotemacs-init-c)
-  ; (dotemacs-init-c++)
-  ; (dotemacs-init-rust)
-  ; (dotemacs-init-latex)
-  ; (dotemacs-init-scala)
+;; (dotemacs-init-c)
+;; (dotemacs-init-c++)
+;; (dotemacs-init-rust)
+;; (dotemacs-init-latex)
+;; (dotemacs-init-scala)
   (dotemacs-init-mapserver)
   (dotemacs-init-plantuml)
 
-  ;; ;; other modes
+  ;; other modes
   (dotemacs-init-dired)
   (dotemacs-init-org)
 
@@ -85,9 +85,9 @@
 
 (defun string-from-file (file-path)
   "Return file-paths's file content."
-      (with-temp-buffer
-        (insert-file-contents file-path)
-        (buffer-string)))
+  (with-temp-buffer
+    (insert-file-contents file-path)
+    (buffer-string)))
 
 (defun process-name (pid)
   "Return process name found by pid"
@@ -114,12 +114,11 @@
   (message "calling dotemacs-init-package-archives")
   (require 'package)
   (package-initialize)
-  ; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
   t)
 
 (defun dotemacs-init-load-packages ()
-  (require-or-install 'feature-mode)
   t)
 
 (defun dotemacs-init-utils ()
