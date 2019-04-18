@@ -66,8 +66,10 @@ plugins=(
     dotenv
     django
     git
+    git-extras
+    gradle
     history
-    mercurial
+#    mercurial
     virtualenvwrapper
 )
 
