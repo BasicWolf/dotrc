@@ -493,7 +493,7 @@ is considered to be a project root."
 
     ; (ac-flyspell-workaround)
 
-    (define-key python-mode-map (kbd "C-<enter>") 'jedi:complete)
+    (define-key python-mode-map (kbd "C-<return>") 'jedi:complete)
     (define-key python-mode-map (kbd "C-c .") 'jedi:goto-definition)
     (define-key python-mode-map (kbd "C-c C-f") 'jedi:show-doc)
     t)
