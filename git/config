@@ -1,23 +1,24 @@
 [user]
-name = Zaur Nasibov
+    name = Zaur Nasibov
 
 [push]
-default = simple
+    default = simple
 
 
 [alias]
-co = checkout
-ci = commit
-st = status
-br = branch
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    branches = branch -la
 
-type = cat-file -t
-dump = cat-file -p
+    type = cat-file -t
+    dump = cat-file -p
 
-subupdate = submodule update --recursive --remote
+    subupdate = submodule update --recursive --remote
 
-# Logs and history aliases
-hist = log --graph --date=short --pretty=format:\"%h %ad | %s%d [%an]\"
-lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-lg = !"git lg1"
+    # Logs and history aliases
+    hist = log --graph --date=short --pretty=format:\"%h %ad | %s%d [%an]\"
+    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg = !"git lg1"
