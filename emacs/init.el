@@ -464,7 +464,12 @@ is considered to be a project root."
       (when project-name (venv-workon project-name)))
     (jedi:setup)
     (setq jedi:setup-keys t)
-    (setq jedi:complete-on-dot t))
+    (setq jedi:complete-on-dot t)
+    ;; ensure that jedi uses Python 3
+    (setq jedi:environment-root "jedi")  ; or any other name you like
+    (setq jedi:environment-virtualenv
+          (append python-environment-virtualenv
+                  '("--python" "/usr/bin/python3"))))
 
   (defun python-toggle-pudb()
     "Insert breakpoint() at cursor point."
