@@ -466,10 +466,11 @@ is considered to be a project root."
     (setq jedi:setup-keys t)
     (setq jedi:complete-on-dot t)
     ;; ensure that jedi uses Python 3
-    (setq jedi:environment-root "jedi")  ; or any other name you like
+    (setq jedi:environment-root "jedi")
     (setq jedi:environment-virtualenv
-          (append python-environment-virtualenv
-                  '("--python" "/usr/bin/python3"))))
+           (append python-environment-virtualenv
+                   '("--python" "/usr/bin/python3")))
+    )
 
   (defun python-toggle-pudb()
     "Insert breakpoint() at cursor point."
@@ -682,7 +683,12 @@ is considered to be a project root."
    '(;; other Babel languages
      (plantuml . t)))
 
-  (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  (defun my-plantuml-mode-hook ()
+    (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+    (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+    (setq plantuml-exec-mode 'jar))
+  (add-hook 'plantuml-mode-hook  'my-plantuml-mode-hook)
+
   t)
 
 (defun dotemacs-init-org ()
