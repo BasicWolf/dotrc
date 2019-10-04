@@ -63,6 +63,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    aws
     dotenv
     django
     git
@@ -78,6 +79,9 @@ source $ZSH/oh-my-zsh.sh
 
 # ===================
 # User  configuration
+
+setopt HIST_IGNORE_SPACE
+setopt share_history
 
 export MANPATH="/usr/local/man:$MANPATH"
 
