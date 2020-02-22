@@ -170,6 +170,10 @@
   (desktop-save-mode 1)
 
   (add-to-list 'desktop-modes-not-to-save 'dired-mode)
+
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
   t)
 
 
