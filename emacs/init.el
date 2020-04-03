@@ -251,6 +251,7 @@
   ;; flyspell mode
   (setq flyspell-issue-welcome-flag nil) ;; improve flyspell performance
   (add-to-list 'auto-mode-alist '("\\.txt$" . flyspell-mode))
+  (add-to-list 'auto-mode-alist '("\\.rst$" . flyspell-mode))
 
   ;; bury *scratch* buffer instead of kill it
   (defadvice kill-buffer (around kill-buffer-around-advice activate)
