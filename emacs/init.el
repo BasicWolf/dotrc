@@ -99,7 +99,7 @@
 
 ;; INITIALIZERS
 (defun dotemacs-init-load-path ()
-  (add-to-list 'load-path "/usr/share/emacs24/site-lisp/emacs-goodies-el/")
+  (add-to-list 'load-path "/usr/share/emacs26/site-lisp/emacs-goodies-el/")
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
   (add-to-list 'load-path (concat init-dir "lib/"))
   t)
@@ -115,7 +115,7 @@
   (require 'package)
   (package-initialize)
 ; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
   t)
 
 (defun dotemacs-init-load-packages ()
@@ -131,6 +131,9 @@
 
 
 (defun dotemacs-init-internal-environment ()
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
+
   (add-to-list 'backup-directory-alist (cons "." (concat var-dir "backups/")))
   ; (setq tramp-backup-directory-alist backup-directory-alist)
 
