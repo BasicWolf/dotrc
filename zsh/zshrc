@@ -1,6 +1,6 @@
 #    -*- mode: shell-script -*-
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/.local/bin:/usr/local/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/zaur/.oh-my-zsh
@@ -58,6 +58,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # ==== EARLY PLUGINS CONFIGURATION ==== #
 export WORKON_HOME=$HOME/.virtualenvs
 
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -70,6 +71,7 @@ plugins=(
     git-extras
     gradle
     history
+    ls
 #    mercurial
     virtualenvwrapper
 )
@@ -104,7 +106,7 @@ export EDITOR="emacs -nw -q"
 alias hgs="hg summary && hg stat"
 alias grep="grep --exclude-dir='.hg' --exclude-dir='.build'"
 alias emq="emacs -nw -q"
-alias ls="ls -F"
+# alias ls="ls -F"
 
 # KeyChain for storing SSH passwords
 eval `keychain --eval --agents ssh id_rsa`
