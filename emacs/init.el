@@ -707,10 +707,10 @@ is considered to be a project root."
     (setq org-log-done t)
 
     (setq org-clock-persist 'history)
-    (setq calendar-week-start-day 1)
-
     (org-clock-persistence-insinuate)
-
+    (setq calendar-week-start-day 1)
+    (setq org-clock-idle-time 5)
+    
     (org-indent-mode t)
 
     (define-key org-mode-map (kbd "C-c .") 'org-time-stamp)
