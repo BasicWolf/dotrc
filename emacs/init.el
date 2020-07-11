@@ -30,7 +30,7 @@
   (dotemacs-init-python)
   (dotemacs-init-javascript)
   ;; (dotemacs-init-plsql)
-  ;; (dotemacs-init-rst)
+  (dotemacs-init-rst)
   (dotemacs-init-web)
   (dotemacs-init-xml)
 ;; (dotemacs-init-c)
@@ -649,6 +649,7 @@ is considered to be a project root."
     (local-set-key (kbd "<S-return>") 'newline))
 
   (add-hook 'rst-mode-hook 'my-rst-mode-hook)
+  (add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
   t)
 
 (defun dotemacs-init-web ()
