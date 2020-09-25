@@ -230,6 +230,7 @@
   (fset 'yes-or-no-p 'y-or-n-p)           ;; make all "yes or no" prompts show "y or n"
   (transient-mark-mode 0)                 ;; don't show region selection
   (put 'narrow-to-region 'disabled nil)   ;; enable narrowing
+  (global-display-fill-column-indicator-mode)  ;; enable fill column indicator
 
   ;; kill current buffer, without prompting
   (global-set-key
@@ -242,14 +243,6 @@
 
   ;; default grep command
   (setq grep-command "grep -nHr -e ")
-
-  ;; fci mode 80 columns indicator
-  ;; (require 'fill-column-indicator)
-  ;; (setq fci-style 'rule)
-  ;; (setq fci-rule-width 1)
-  ;; (setq fci-rule-color "darkblue")
-  ;; (setq-default fill-column 80)
-  ;; (global-set-key "\C-x\M-f" 'fci-mode)
 
   ;; flyspell mode
   (setq flyspell-issue-welcome-flag nil) ;; improve flyspell performance
@@ -649,7 +642,7 @@ is considered to be a project root."
     (local-set-key (kbd "<S-return>") 'newline))
 
   (add-hook 'rst-mode-hook 'my-rst-mode-hook)
-  (add-to-list 'auto-mode-alist '("\\.rst" . rst-mode))
+  (add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
   t)
 
 (defun dotemacs-init-web ()
