@@ -76,6 +76,7 @@ awful.rules.rules = {
       rule_any = {
          class = {
             "vivaldi", "Vivaldi", "Vivaldi-snapshot",
+            "Navigator", "Firefox",
             "Chromium"
          }
       },
@@ -84,18 +85,13 @@ awful.rules.rules = {
 
    -- Put windows to dev tag
    {
-      rule_any = { class = {"Emacs"}},
-      properties = { tag = "dev"}
-   },
-
-   -- Put windows to msg [main screen] tag
-   {
       rule_any = {
          class = {
-            "Pidgin", "pidgin",
+            "Emacs",
+            "jetbrains-idea"
          }
       },
-      properties = { screen = sub_screen, tag = "msg"}
+      properties = { tag = "dev"}
    },
 
    -- Put windows to msg [sub screen] tag
@@ -106,7 +102,8 @@ awful.rules.rules = {
             "Mail", "mail",
             "Skype", "skype",
             "Telegram", "telegram",
-            "Thunderbird", "thunderbird"
+            "Thunderbird", "thunderbird",
+            "microsoft teams - preview", "Microsoft Teams - Preview"
          }
       },
       properties = { screen = sub_screen, tag = "msg"}
@@ -116,7 +113,8 @@ awful.rules.rules = {
    {
       rule_any = { class = {
                       "Transmission", "transmission",
-                      "Clementine", "clementine"
+                      "Clementine", "clementine",
+                      "spotify", "Spotify"
                  }},
       properties = { screen = sub_screen, tag = "various"}
    }
