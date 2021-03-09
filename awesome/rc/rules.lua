@@ -101,6 +101,7 @@ awful.rules.rules = {
             "Icedove", "icedove",
             "Mail", "mail",
             "Skype", "skype",
+            "Slack", "slack",
             "Telegram", "telegram",
             "Thunderbird", "thunderbird",
             "microsoft teams - preview", "Microsoft Teams - Preview"

@@ -4,6 +4,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 
 local volume = require("../lib/volume");
+local battery = require("../lib/battery");
 
 loadrc("cpuwidget", "zawesome/cpuwidget")
 
@@ -28,6 +29,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Volume widget
 volume_widget, volume_wrapper_widget = volume.create_volume_widget()
+
+battery_widget, battery_wrapper_widget = battery.create_battery_widget()
 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -135,6 +138,7 @@ awful.screen.connect_for_each_screen(function(s)
     right_layout:add(mykeyboardlayout)
     right_layout:add(volume_wrapper_widget)
     right_layout:add(mytextclock)
+    right_layout:add(battery_wrapper_widget)
     right_layout:add(s.mylayoutbox)
 
     -- Now bring it all together (with the tasklist in the middle)
