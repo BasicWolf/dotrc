@@ -230,7 +230,7 @@
   (fset 'yes-or-no-p 'y-or-n-p)           ;; make all "yes or no" prompts show "y or n"
   (transient-mark-mode 0)                 ;; don't show region selection
   (put 'narrow-to-region 'disabled nil)   ;; enable narrowing
-  (global-display-fill-column-indicator-mode)  ;; enable fill column indicator
+  ; (global-display-fill-column-indicator-mode)  ;; enable fill column indicator
 
   ;; kill current buffer, without prompting
   (global-set-key
