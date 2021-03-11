@@ -1,13 +1,13 @@
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Match, Screen
 from libqtile.dgroups import simple_key_binder
 from libqtile.lazy import lazy
 
-from qtlrc.keybindings import keys
+from qtlrc.keybindings import KEYS
 
-mod = "mod4"
+keys = KEYS
 
 groups = [
     Group('Web'),
@@ -30,7 +30,7 @@ layouts = [
     # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
-    # layout.Zoomy(),
+    layout.Zoomy(),
 ]
 
 widget_defaults = dict(
@@ -40,38 +40,38 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        top=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        'launch': ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.Systray(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-                widget.QuickExit(),
-            ],
-            24,
+_top_bar = bar.Bar(
+    [
+        widget.GroupBox(),
+        widget.Prompt(),
+        widget.TaskList(),
+        widget.Chord(
+            chords_colors={
+                'launch': ("#ff0000", "#ffffff"),
+            },
+            name_transform=lambda name: name.upper(),
         ),
-    ),
-]
+        widget.Volume(),
+        widget.CPUGraph(width=60, samples=60),
+        widget.BatteryIcon(),
+        widget.Systray(),
+        widget.Clock(format='%a %d/%m | %H:%M'),
+        widget.QuickExit(default_text='[ Exit ]', countdown_format='Exit: {}'),
+        widget.CurrentLayoutIcon(),
+        widget.Notify()
+    ],
+    size=24,
+)
+
+screens = [Screen(top=_top_bar)]
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
+    Drag(['mod4'], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
+    Drag(['mod4'], "Button3", lazy.window.set_size_floating(),
          start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front())
+    Click(['mod4'], "Button2", lazy.window.bring_to_front())
 ]
 
 dgroups_key_binder = simple_key_binder('mod4', '123qw')

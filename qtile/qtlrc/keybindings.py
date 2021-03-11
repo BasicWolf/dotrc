@@ -1,19 +1,22 @@
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, EzKey
+from libqtile.config import Key, EzKey
 from libqtile.lazy import lazy
-from libqtile.log_utils import logger
 from libqtile.utils import guess_terminal
 
 
 terminal = guess_terminal()
+file_manager = 'thunar'
 
-keys = [
+KEYS = [
+    # Launchers
     EzKey('M-<Return>', lazy.spawn(terminal), desc="Launch terminal"),
+    EzKey('M-<BackSpace>', lazy.spawn(file_manager)),
+
     # Switch between windows
     Key(["mod4"], "h", lazy.layout.left(), desc="Move focus to left"),
     Key(["mod4"], "l", lazy.layout.right(), desc="Move focus to right"),
     Key(["mod4"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["mod4"], "k", lazy.layout.up(), desc="Move focus up"),
-    Key(["mod4"], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    EzKey('M-<Tab>', lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key(
@@ -46,11 +49,10 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    # Key(["mod4"], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+
     # Toggle between different layouts as defined below
-    Key(["mod4"], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key(["mod4"], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key(["mod4", "control"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key(["mod4", "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    EzKey('M-<space>', lazy.next_layout(), desc="Toggle between layouts"),
+    EzKey('M-C-c', lazy.window.kill(), desc="Kill focused window"),
+    EzKey('M-C-r', lazy.restart(), desc="Restart Qtile"),
     Key(["mod4"], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
