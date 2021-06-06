@@ -1,1 +1,4 @@
 emacs/url/cookies
+
+__pycache__/
+.idea/
