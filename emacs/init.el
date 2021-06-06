@@ -230,7 +230,8 @@
   (fset 'yes-or-no-p 'y-or-n-p)           ;; make all "yes or no" prompts show "y or n"
   (transient-mark-mode 0)                 ;; don't show region selection
   (put 'narrow-to-region 'disabled nil)   ;; enable narrowing
-  ; (global-display-fill-column-indicator-mode)  ;; enable fill column indicator
+  (global-display-fill-column-indicator-mode)  ;; enable fill column indicator
+  (setq-default display-fill-column-indicator-column 80);
 
   ;; kill current buffer, without prompting
   (global-set-key
@@ -704,7 +705,7 @@ is considered to be a project root."
     (org-clock-persistence-insinuate)
     (setq calendar-week-start-day 1)
     (setq org-clock-idle-time 5)
-    
+
     (org-indent-mode t)
 
     (define-key org-mode-map (kbd "C-c .") 'org-time-stamp)
