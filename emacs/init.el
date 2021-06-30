@@ -93,7 +93,7 @@
   t)
 
 (defun dotemacs-init-for-debian ()
-  (defconst debian-emacs-flavor 'emacs24
+  (defconst debian-emacs-flavor 'emacs27
     "A symbol representing the particular debian flavor of emacs running.
  Something like 'emacs20, 'xemacs20, etc.")
   t)
