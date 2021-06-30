@@ -32,8 +32,6 @@
   (dotemacs-init-rst)
   (dotemacs-init-web)
   (dotemacs-init-xml)
-;; (dotemacs-init-c)
-;; (dotemacs-init-c++)
 ;; (dotemacs-init-rust)
 ;; (dotemacs-init-latex)
 ;; (dotemacs-init-scala)
@@ -535,31 +533,6 @@ is considered to be a project root."
     (if (equal (file-name-nondirectory buffer-file-name) "Cargo.toml")
         (cargo-minor-mode)))
   (add-hook 'toml-mode-hook 'my-toml-mode-hook)
-  t)
-
-
-(defun dotemacs-init-c ()
-  (setq c-basic-offset 4)
-
-  (defun my-c-mode-hook-binds ()
-    (defvar c-mode-base-map)
-    (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
-    (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods)
-    (define-key c-mode-base-map (kbd "M-h") 'mark-defun))
-  (add-hook 'c-mode-common-hook 'my-c-mode-hook-binds)
-  t)
-
-
-
-(defun dotemacs-init-c++ ()
-  (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
-  (setq c-default-style "stroustrup")
-  (setq c-basic-offset 4)
-
-  (defun my-c++-mode-hook ()
-    (c-set-offset 'innamespace 0))
-
-  (add-hook 'c++-mode-hook 'my-c++-mode-hook)
   t)
 
 
