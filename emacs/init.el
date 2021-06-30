@@ -33,7 +33,6 @@
   (dotemacs-init-web)
   (dotemacs-init-xml)
 ;; (dotemacs-init-rust)
-;; (dotemacs-init-scala)
   (dotemacs-init-mapserver)
   (dotemacs-init-plantuml)
 
@@ -526,12 +525,6 @@ is considered to be a project root."
     (if (equal (file-name-nondirectory buffer-file-name) "Cargo.toml")
         (cargo-minor-mode)))
   (add-hook 'toml-mode-hook 'my-toml-mode-hook)
-  t)
-
-
-(defun dotemacs-init-scala ()
-  (require 'ensime)
-  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
   t)
 
 
