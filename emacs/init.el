@@ -87,7 +87,6 @@
 
 ;; INITIALIZERS
 (defun dotemacs-init-load-path ()
-  (add-to-list 'load-path "/usr/share/emacs26/site-lisp/emacs-goodies-el/")
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
   (add-to-list 'load-path (concat init-dir "lib/"))
   t)
