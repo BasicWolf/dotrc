@@ -33,7 +33,6 @@
   (dotemacs-init-web)
   (dotemacs-init-xml)
 ;; (dotemacs-init-rust)
-;; (dotemacs-init-latex)
 ;; (dotemacs-init-scala)
   (dotemacs-init-mapserver)
   (dotemacs-init-plantuml)
@@ -58,12 +57,6 @@
 (defvar jedi:complete-on-dot)
 (defvar js2-mode-map)
 (defvar python-mode-map)
-(defvar TeX-auto-save)
-(defvar TeX-parse-self)
-(defvar TeX-modes)
-(defvar TeX-PDF-mode)
-(defvar LaTeX-section-hook)
-(defvar TeX-output-view-style)
 (defvar org-clock-persist)
 (defvar web-mode-markup-indent-offset)
 (defvar web-mode-code-indent-offset)
@@ -533,34 +526,6 @@ is considered to be a project root."
     (if (equal (file-name-nondirectory buffer-file-name) "Cargo.toml")
         (cargo-minor-mode)))
   (add-hook 'toml-mode-hook 'my-toml-mode-hook)
-  t)
-
-
-(defun dotemacs-init-latex ()
-  (load "auctex.el")
-  (load "preview-latex.el")
-  ;(load "cdlatex.el")
-  ;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq tex-dvi-view-command "xgdvi")
-  (setq TeX-modes (quote (latex-mode)))
-  (setq TeX-PDF-mode t) ; set pdf-mode to be active by default
-
-  (setq LaTeX-section-hook
-        '(LaTeX-section-heading
-          LaTeX-section-title
-          LaTeX-section-toc
-          LaTeX-section-section
-          LaTeX-section-label))
-
-  (defun my-latex-mode-hook ()
-    ;(turn-on-cdlatex t)
-    (reftex-mode)
-    (flyspell-mode)
-    (add-to-list 'TeX-output-view-style '("^pdf$" . "evince %o %(outpage)")))
-  (add-hook 'LaTeX-mode-hook 'my-latex-mode-hook t)
   t)
 
 
