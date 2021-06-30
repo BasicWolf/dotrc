@@ -28,7 +28,6 @@
   (dotemacs-init-elisp)
   (dotemacs-init-python)
   (dotemacs-init-javascript)
-  ;; (dotemacs-init-plsql)
   (dotemacs-init-rst)
   (dotemacs-init-web)
   (dotemacs-init-xml)
@@ -525,21 +524,6 @@ is considered to be a project root."
     (if (equal (file-name-nondirectory buffer-file-name) "Cargo.toml")
         (cargo-minor-mode)))
   (add-hook 'toml-mode-hook 'my-toml-mode-hook)
-  t)
-
-
-(defun dotemacs-init-plsql ()
-  (load "indent_sql.el")
-  (load "plsql")
-
-  (defun my-plsql-mode-hook ()
-    (setq indent-line-function 'ig-indent-sql))
-  (add-hook 'plsql-mode-hook 'my-plsql-mode-hook)
-
-  (setq auto-mode-alist
-        (append
-         '(("\\.\\(p\\(?:k[bg]\\|ls\\)\\|sql\\)\\'" . plsql-mode))
-         auto-mode-alist))
   t)
 
 
