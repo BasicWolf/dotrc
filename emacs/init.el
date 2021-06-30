@@ -32,7 +32,7 @@
   (dotemacs-init-web)
   (dotemacs-init-xml)
 ;; (dotemacs-init-rust)
-  (dotemacs-init-mapserver)
+
   (dotemacs-init-plantuml)
 
   ;; other modes
@@ -563,12 +563,6 @@ is considered to be a project root."
   (setq nxml-child-indent 4 nxml-attribute-indent 4)
   t)
 
-
-(defun dotemacs-init-mapserver ()
-  (autoload 'mapserver-mode "mapserver-mode" "Mode for editing UMN MapServer files." t)
-  (add-to-list 'auto-mode-alist '("\\.map\\'" . mapserver-mode))
-  (add-to-list 'auto-mode-alist '("\\.inc\\'" . mapserver-mode))
-  t)
 
 (defun dotemacs-init-plantuml ()
   ;; active Org-babel languages
