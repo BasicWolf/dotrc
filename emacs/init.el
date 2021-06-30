@@ -24,7 +24,6 @@
   (dotemacs-init-global-key-bindings)
 
   ;; programming modes
-  (dotemacs-init-cedet)
   (dotemacs-init-compilation)
   (dotemacs-init-elisp)
   (dotemacs-init-python)
@@ -342,29 +341,6 @@
   t)
 
 
-(defun dotemacs-init-cedet ()
-  ;; Semantic
-  (semantic-mode 1)
-  ;; (global-ede-mode 1)
-
-  (global-semantic-idle-completions-mode)
-  (global-semantic-idle-summary-mode)
-  (global-semantic-idle-scheduler-mode)
-  (global-semantic-highlight-func-mode)
-  (global-semantic-decoration-mode 0)
-
-  (setq semantic-idle-scheduler-idle-time 60)
-
-  (which-function-mode 1)
-
-  ;; solves problems with tabbar after excessive code helpers
-  (global-semantic-stickyfunc-mode -1)
-
-  (require 'semantic/util)
-  (require 'eassist)
-
-  (setq semanticdb-default-save-directory (concat var-dir "semanticdb"))
-  t)
 
 
 (defun dotemacs-init-compilation ()
