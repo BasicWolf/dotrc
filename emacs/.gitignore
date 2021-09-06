@@ -9,6 +9,8 @@ session.*
 
 .python-environments/
 elpa/
+quelpa/
+tramp/
 auto-save-list/
 image-dired/
 bookmarks/
