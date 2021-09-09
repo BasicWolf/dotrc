@@ -1,3 +1,4 @@
+
 ;; After 10+ years of my old .emacs, I have to start from a complete scratch :)
 ;; The goal is to keep only the necessary stuff in a clean manner.
 ;; Good luck to me!
@@ -91,7 +92,7 @@
 
   (use-package paradox
     :ensure t
-    :defer 1
+    :defer t
     :config
     (paradox-enable))
   t)
@@ -126,23 +127,23 @@
     (toggle-indicate-empty-lines)    ;; show the empty lines at the end (bottom) of the buffer
     (blink-cursor-mode 0)            ;; the blinking cursor is pretty annoying, so disable it.
     (tool-bar-mode 0)                ;; disable toolbar
-    (global-prettify-symbols-mode 1) ;; render "lambda" as λ
+    (global-prettify-symbols-mode t) ;; render "lambda" as λ
+    (transient-mark-mode 0)          ;; don't show region selection
     :custom
     (show-trailing-whitespace t)     ;; show trailing whitespace in all modes
     (indent-tabs-mode nil)           ;; spaces instead of tabs
     (tab-width 4)                    ;; default tab width
-    (frame-title-format
-     '("Emacs - " buffer-file-name "%f" ("%b"))) ;; change emacs window title
-    (column-number-mode 1)           ;; show the column number
-    (transient-mark-mode 0)          ;; don't show region selection
+    (frame-title-format              ;; Friendly Emacs window title
+     (list '(buffer-file-name "%f" (dired-directory dired-directory "%b"))
+           " - Emacs " emacs-version))
+    (column-number-mode 1)                         ;; show the column number
     (global-display-fill-column-indicator-mode 1)  ;; show vertical column indicator ...
     (display-fill-column-indicator-column 80)      ;; ... on 80th column position
     (global-display-line-numbers-mode 1)           ;; show line numbers everywhere
 
     :bind
     ;; kill current buffer, without prompting
-    (("\C-xk" . (lambda () (interactive) (kill-buffer (current-buffer)))))
-    )
+    (("\C-xk" . (lambda () (interactive) (kill-buffer (current-buffer))))))
 
   ;; Enable shift-arrows switching between windows
   (use-package windmove
@@ -218,6 +219,7 @@
   ;; More at https://oremacs.com/swiper/
   (use-package ivy
     :ensure t
+
     :custom
     (ivy-count-format "%d/%d ")   ;; ivy completions counter format, e.g. 2/9
     (ivy-use-selectable-prompt t) ;; "Make the prompt line selectable"
