@@ -17,7 +17,8 @@
   (dotemacs/repositories)
   (dotemacs/package-management)
   (dotemacs/ui-ux)
-  (dotemacs/ux/highlight)
+  (dotemacs/editor/fonts)
+  (dotemacs/editor/highlight)
   (dotemacs/external-behaviour)
   (dotemacs/minibuffer)
   (dotemacs/search)
@@ -198,6 +199,9 @@
     (load-theme 'solarized-light t)
     :custom
     (solarized-distinct-fringe-background t)
+    (solarized-high-contrast-mode-line t)
+    ;; Don't change size of org-mode headlines (but keep other size-changes)
+    (solarized-scale-org-headlines nil)
 
     ;; Determines how to draw underlined text.
     ;; nil - draw it at the baseline level of the font;
@@ -258,8 +262,8 @@
   t)
 
 
-(defun dotemacs/ux/highlight ()
-  (message "dotemacs/ux/highlight")
+(defun dotemacs/editor/highlight ()
+  (message "dotemacs/editor/highlight")
 
   (use-package paren
     :config
@@ -309,7 +313,23 @@
 
    t)
 
+(defun dotemacs/editor/fonts ()
+  (message "dotemacs/editor/fonts")
 
+  (use-package faces
+  :defer t
+  :custom
+  (face-font-family-alternatives
+   '(("Monospace" "Hack" "Ubuntu Mono")
+     ("Monospace Serif" "Monospace")
+     ("Serif" "DejaVu Serif" "Times New Roman" "serif")))
+  :custom-face
+  (variable-pitch ((t (:family "Serif" :height 120))))
+  (fixed-pitch ((t (:family "Monospace Serif" :height 110))))
+  (font-lock-comment-face ((t (:family "Monospace Serif" :height 130))))
+  (default ((t (:family "Monospace Serif" :height 110)))))
+  t)
+; comment here
 (defun dotemacs/elisp ()
   (message "dotemacs/elisp")
 
@@ -357,4 +377,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(hl-todo ((t (:inherit hl-todo :italic t)))))
+ '(default ((t (:family "Monospace Serif" :height 110))))
+ '(comment ((t (:family "Monospace Serif" :height 130 :weight bold))))
+ '(fixed-pitch ((t (:family "Monospace Serif" :height 110))))
+ '(hl-todo ((t (:inherit hl-todo :italic t))))
+ '(variable-pitch ((t (:family "Serif" :height 120)))))
