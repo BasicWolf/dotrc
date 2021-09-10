@@ -308,9 +308,7 @@
     (dired-recursive-copies 'top)
     (dired-recursive-deletes 'top)
     (diredp-hide-details-initially-flag nil)
-    (dired-listing-switches "-alh")
-    )
-
+    (dired-listing-switches "-alh"))
    t)
 
 (defun dotemacs/editor/fonts ()
@@ -326,10 +324,10 @@
   :custom-face
   (variable-pitch ((t (:family "Serif" :height 120))))
   (fixed-pitch ((t (:family "Monospace Serif" :height 110))))
-  (font-lock-comment-face ((t (:family "Monospace Serif" :height 130))))
-  (default ((t (:family "Monospace Serif" :height 110)))))
+  (font-lock-comment-face ((t (:family "Monospace Serif" :height 110))))
+  (default ((t (:family "Monospace Serif" :height 130)))))
   t)
-; comment here
+
 (defun dotemacs/elisp ()
   (message "dotemacs/elisp")
 
