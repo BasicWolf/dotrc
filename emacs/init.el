@@ -239,6 +239,7 @@
     :custom
     (custom-file null-device)) ;; "Don't store customizations"
 
+  ;; A fantastic mode which shows key combination completions in minibuffer
   (use-package which-key
     :ensure t
     :custom
