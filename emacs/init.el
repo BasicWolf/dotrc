@@ -25,9 +25,13 @@
   (dotemacs/search)
   (dotemacs/dired)
 
+  (dotemacs/prog)
+  (dotemacs/prog/snippets)
+
   ;; Major editor modes
-  (dotemacs/elisp)
-  (dotemacs/restructured-text)
+  (dotemacs/prog/docker)
+  (dotemacs/prog/elisp)
+  (dotemacs/prog/restructured-text)
   t)
 
 
@@ -248,7 +252,6 @@
     (which-key-mode)))
 
 
-
 (defun dotemacs/minibuffer ()
   (message "dotemacs/minibuffer")
   ;; Ivy is an interactive interface for completion in Emacs.
@@ -348,6 +351,7 @@
     (dired-listing-switches "-alh"))
    t)
 
+
 (defun dotemacs/editor/fonts ()
   (message "dotemacs/editor/fonts")
 
@@ -365,8 +369,95 @@
   (default ((t (:family "Monospace Serif" :height 130)))))
   t)
 
-(defun dotemacs/elisp ()
-  (message "dotemacs/elisp")
+
+(defun dotemacs/prog ()
+  ;; Language Server Protocol support for Emacs
+  ;; The idea behind LSP is to standardize the protocol for how tools and
+  ;; servers communicate, so a single Language Server can be re-used in multiple
+  ;; development tools, and tools can support languages with minimal effort.
+  (use-package lsp-mode
+    :init
+    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+    (setq lsp-keymap-prefix "C-c l")
+    :hook ((python-mode . lsp)
+           (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+
+  ;; Contains all the higher level UI modules of lsp-mode,
+  ;; like flycheck support and code lenses.
+  (use-package lsp-ui
+    :ensure t
+    :commands lsp-ui-mode)
+
+  (use-package lsp-ivy
+    :ensure t
+    :commands lsp-ivy-workspace-symbol)
+  ; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+  ;; optional if you want which-key integration
+  (use-package which-key
+    :config
+    (which-key-mode))
+
+  (use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
+
+  ;; Autocompletion ;;
+  ;; Company is a text completion framework for Emacs.
+  ;; The name stands for "complete anything". It uses pluggable back-ends and
+  ;; front-ends to retrieve and display completion candidates.
+  (use-package company
+    :ensure t
+    :bind
+    (:map company-active-map
+          ("C-n" . company-select-next-or-abort)
+          ("C-p" . company-select-previous-or-abort))
+    :hook
+    (after-init . global-company-mode))
+
+  ;; control how documentation pops up when idling on completion candidate
+  (use-package company-quickhelp
+    :ensure t
+    :defer t
+    :custom
+    (company-quickhelp-delay 3)
+    (company-quickhelp-mode 1))
+
+  ;; syntax checking
+  (use-package flycheck
+    :ensure t
+    :hook
+    (prog-mode . flycheck-mode))
+  t)
+
+
+(defun dotemacs/prog/snippets ()
+  (message "dotemacs/prog/snippets")
+
+  (use-package yasnippet
+    :defer 0.1
+    :ensure t
+    :custom
+    (yas-prompt-functions '(yas-completing-prompt))
+    :config
+    (yas-reload-all)
+    :hook
+    (prog-mode  . yas-minor-mode))
+  )
+
+
+(defun dotemacs/prog/docker ()
+  (message "dotemacs/prog/docker")
+
+  (use-package docker-compose-mode
+    :ensure t))
+
+
+(defun dotemacs/prog/elisp ()
+  (message "dotemacs/prog/elisp")
 
   (use-package lisp
     :init
@@ -383,12 +474,14 @@
     (add-hook 'emacs-lisp-mode-hook (lambda () (eros-mode 1))))
   t)
 
-(defun dotemacs/restructured-text ()
-  (message "dotemacs/restructured-text")
+
+(defun dotemacs/prog/restructured-text ()
+  (message "dotemacs/prog/restructured-text")
 
   (use-package rst)
 
   t)
+
 
 (defun dotemacs/markdown ()
   (use-package markdown-mode :ensure t)
