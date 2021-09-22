@@ -1,4 +1,3 @@
-
 ;; After 10+ years of my old .emacs, I have to start from a complete scratch :)
 ;; The goal is to keep only the necessary stuff in a clean manner.
 ;; Good luck to me!
@@ -6,7 +5,7 @@
 ;; * https://github.com/a13/emacs.d
 ;; * https://github.com/howardabrams/dot-files
 
-
+;;; Code:
 ;; GLOBALS
 (defvar init-dir (file-name-directory load-file-name))
 (defvar var-dir (concat init-dir "var/"))
@@ -486,9 +485,12 @@
     (defconst lisp--prettify-symbols-alist
       '(("lambda"  . ?λ)                  ; Shrink this
         ("."       . ?•)))                ; Enlarge this
-
     :hook
     (after-save . check-parens)) ;; check unbalanced parenthesis in current buffer
+
+  (use-package checkdoc
+    :custom
+    (checkdoc-force-docstrings-flag nil)) ;; no need to warn about missing docstrings
 
   (use-package eros
     :ensure t
