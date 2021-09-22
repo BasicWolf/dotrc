@@ -16,6 +16,7 @@
 
   (dotemacs/repositories)
   (dotemacs/package-management)
+  (dotemacs/env)
   (dotemacs/ui)
   (dotemacs/ux)
   (dotemacs/editor/fonts)
@@ -105,6 +106,18 @@
   (use-package try
     :ensure t
     :defer t)
+  t)
+
+
+(defun dotemacs/env ()
+  (message "dotemacs/env")
+
+  ;; Ensure environment variables inside Emacs look the same as in the user's shell.
+  (use-package exec-path-from-shell
+    :ensure t
+    :defer 0.1
+    :config
+    (exec-path-from-shell-initialize))
   t)
 
 
@@ -349,6 +362,15 @@
     (dired-recursive-deletes 'top)
     (diredp-hide-details-initially-flag nil)
     (dired-listing-switches "-alh"))
+
+  (use-package dired-hide-dotfiles
+    :ensure t
+    :bind
+    (:map dired-mode-map
+          ("." . dired-hide-dotfiles-mode))
+    :hook
+    (dired-mode . dired-hide-dotfiles-mode))
+
    t)
 
 
