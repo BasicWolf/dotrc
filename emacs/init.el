@@ -32,6 +32,8 @@
   (dotemacs/prog/docker)
   (dotemacs/prog/elisp)
   (dotemacs/prog/restructured-text)
+
+  (dotemacs/mode/eshell)
   t)
 
 
@@ -506,9 +508,47 @@
 
   t)
 
-
 (defun dotemacs/markdown ()
   (use-package markdown-mode :ensure t)
   t)
+
+(defun dotemacs/mode/eshell ()
+  (message "dotemacs/mode/eshell")
+
+  ;; smart display of output
+  ;; hard to explain, just see for yourself
+  (use-package em-smart
+    :defer t
+    :config
+    (eshell-smart-initialize)
+    :custom
+    (eshell-where-to-jump 'begin)
+    (eshell-review-quick-commands nil)
+    (eshell-smart-space-goes-to-end t))
+
+  ;; Fish-like history autosuggestions in eshell
+  (use-package esh-autosuggest
+    :ensure t
+    :hook (eshell-mode . esh-autosuggest-mode))
+
+  ;; Display extra information and color for your eshell prompt.
+  ;; e.g. remote user, host, git branch, virtualenv etc.
+  (use-package eshell-prompt-extras
+    :ensure t
+    :after (eshell esh-opt)
+    :custom
+    (eshell-prompt-function #'epe-theme-dakrone))
+
+  ;; Show/hide eshell at the bottom of active window with directory of its buffer.
+  (use-package eshell-toggle
+    :ensure t
+    :after projectile
+    :custom
+    (eshell-toggle-use-projectile-root t)
+    (eshell-toggle-run-command nil)
+    :bind
+    ("M-`" . eshell-toggle))
+  t)
+
 
 (main)
