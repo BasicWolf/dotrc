@@ -31,6 +31,7 @@
   ;; Major editor modes
   (dotemacs/prog/docker)
   (dotemacs/prog/elisp)
+  (dotemacs/prog/python)
   (dotemacs/prog/restructured-text)
 
   (dotemacs/mode/eshell)
@@ -125,6 +126,10 @@
 (defun dotemacs/external-behaviour ()
   (message "dotemacs/external-behaviour")
 
+  ;; automatically revert buffers if file contents change
+  (use-package autorevert
+    :defer 0.1)
+
   (use-package files
     :hook
     (before-save . delete-trailing-whitespace)
@@ -212,9 +217,7 @@
                       tags-file-name
                       register-alist)))
       (add-to-list 'desktop-modes-not-to-save 'dired-mode)
-      (desktop-save-mode 1)
-      )
-    )
+      (desktop-save-mode 1)))
 
   (use-package solarized-theme
     :ensure
@@ -394,6 +397,8 @@
 
 
 (defun dotemacs/prog ()
+  (message "dotemac/prog")
+
   ;; Language Server Protocol support for Emacs
   ;; The idea behind LSP is to standardize the protocol for how tools and
   ;; servers communicate, so a single Language Server can be re-used in multiple
@@ -456,10 +461,19 @@
     (prog-mode . flycheck-mode))
 
   ;; projectile
+
+  ;; Trigger different comment actions taking the current location
+  ;; of the point into acount.
+  (use-package smart-comment
+    :ensure t
+    :bind ("M-;" . smart-comment))
+
+  ;; Project interaction, management and navigation
   (use-package projectile
     :defer 0.2
     :ensure t
     :bind
+
     (:map mode-specific-map ("p" . projectile-command-map))  ;; C-c p ...
     :custom
     (projectile-completion-system 'ivy))
@@ -509,6 +523,15 @@
     (add-hook 'emacs-lisp-mode-hook (lambda () (eros-mode 1))))
   t)
 
+
+(defun dotemacs/prog/python ()
+  (message "dotemacs/prog/python")
+
+  (use-package pyvenv
+    :ensure t
+    :config
+    (pyvenv-mode 1))
+  t)
 
 (defun dotemacs/prog/restructured-text ()
   (message "dotemacs/prog/restructured-text")
