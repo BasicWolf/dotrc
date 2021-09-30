@@ -454,6 +454,15 @@
     :ensure t
     :hook
     (prog-mode . flycheck-mode))
+
+  ;; projectile
+  (use-package projectile
+    :defer 0.2
+    :ensure t
+    :bind
+    (:map mode-specific-map ("p" . projectile-command-map))  ;; C-c p ...
+    :custom
+    (projectile-completion-system 'ivy))
   t)
 
 
