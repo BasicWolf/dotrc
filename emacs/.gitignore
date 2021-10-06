@@ -3,17 +3,19 @@
 \#*
 *.elc
 session.*
-
+\.lsp-session*
 
 ## Individual directories ##
 
+.cache/
 .python-environments/
+auto-save-list/
+bookmarks/
+eshell/
 elpa/
+image-dired/
 quelpa/
 tramp/
-auto-save-list/
-image-dired/
-bookmarks/
 var/
 
 ## Individual files ##
