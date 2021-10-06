@@ -333,10 +333,10 @@
     :hook
     (prog-mode . rainbow-delimiters-mode))
 
-  ;; Highlight current cursor line in prog modes
+  ;; Highlight current cursor line in all modes
   (use-package hl-line
-    :hook
-    (prog-mode . hl-line-mode))
+    :init
+    (global-hl-line-mode))
 
   ;; Render numeric literals in source code via configured font
   (use-package highlight-numbers
