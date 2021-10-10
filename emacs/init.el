@@ -18,6 +18,7 @@
   (dotemacs/env)
   (dotemacs/ui)
   (dotemacs/ux)
+  (dotemacs/editor)
   (dotemacs/editor/fonts)
   (dotemacs/editor/highlight)
   (dotemacs/external-behaviour)
@@ -378,6 +379,17 @@
    t)
 
 
+(defun dotemacs/editor ()
+  (message "dotemacs/editor")
+
+  ;; Electric Pair mode is a global minor mode.  When enabled, typing an open parenthesis
+  ;; automatically inserts the corresponding closing parenthesis, and vice versa.
+  (use-package elec-pair
+    :config
+    (electric-pair-mode))
+  t)
+
+
 (defun dotemacs/editor/fonts ()
   (message "dotemacs/editor/fonts")
 
@@ -440,9 +452,10 @@
   (use-package company
     :ensure t
     :bind
-    (:map company-active-map
-          ("C-n" . company-select-next-or-abort)
-          ("C-p" . company-select-previous-or-abort))
+    (("C-<return>" . company-complete)
+     (:map company-active-map
+           ("C-n" . company-select-next-or-abort)
+           ("C-p" . company-select-previous-or-abort)))
     :hook
     (after-init . global-company-mode))
 
@@ -531,6 +544,12 @@
     :ensure t
     :config
     (pyvenv-mode 1))
+
+  ;; Black is the uncompromising Python code formatter.
+  (use-package python-black
+    :ensure t
+    :after python
+    :hook (python-mode . python-black-on-save-mode-enable-dwim))
   t)
 
 (defun dotemacs/prog/restructured-text ()
