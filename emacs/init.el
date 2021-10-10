@@ -10,6 +10,7 @@
 (defvar init-dir (file-name-directory load-file-name))
 (defvar var-dir (concat init-dir "var/"))
 
+
 (defun main()
   (message "Main started")
 
@@ -158,7 +159,6 @@
     (blink-cursor-mode 0)            ;; the blinking cursor is pretty annoying, so disable it.
     (tool-bar-mode 0)                ;; disable toolbar
     (global-prettify-symbols-mode t) ;; render "lambda" as λ
-    (transient-mark-mode 0)          ;; don't show region selection
     :custom
     (show-trailing-whitespace t)     ;; show trailing whitespace in all modes
     (indent-tabs-mode nil)           ;; spaces instead of tabs
@@ -386,7 +386,9 @@
   ;; automatically inserts the corresponding closing parenthesis, and vice versa.
   (use-package elec-pair
     :config
-    (electric-pair-mode))
+    (electric-pair-mode)
+    :custom
+    (electric-pair-delete-adjacent-pairs t))
   t)
 
 
