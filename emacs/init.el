@@ -107,6 +107,7 @@
     :config
     (paradox-enable))
 
+  ;; package showcase -- install a package for current session only
   (use-package try
     :ensure t
     :defer t)

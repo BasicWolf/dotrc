@@ -4,6 +4,7 @@
 *.elc
 session.*
 \.lsp-session*
+tramp
 
 ## Individual directories ##
 
