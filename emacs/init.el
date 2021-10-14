@@ -521,13 +521,14 @@
 (defun dotemacs/prog/elisp ()
   (message "dotemacs/prog/elisp")
 
-  (use-package lisp
+  (use-package lisp-mode
+    :commands emacs-lisp-mode
     :init
     (defconst lisp--prettify-symbols-alist
       '(("lambda"  . ?λ)                  ; Shrink this
         ("."       . ?•)))                ; Enlarge this
-    :hook
-    (after-save . check-parens)) ;; check unbalanced parenthesis in current buffer
+    ;; check unbalanced parenthesis in current buffer
+    (add-hook 'emacs-lisp-mode-hook (lambda () (add-hook 'after-save-hook 'check-parens nil 'buffer-local-only))))
 
   (use-package checkdoc
     :custom
