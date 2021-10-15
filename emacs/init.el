@@ -22,7 +22,6 @@
   (dotemacs/editor)
   (dotemacs/editor/fonts)
   (dotemacs/editor/highlight)
-  (dotemacs/external-behaviour)
   (dotemacs/minibuffer)
   (dotemacs/search)
   (dotemacs/dired)
@@ -31,6 +30,7 @@
   (dotemacs/prog/snippets)
 
   ;; Major editor modes
+  (dotemacs/org)
   (dotemacs/prog/docker)
   (dotemacs/prog/elisp)
   (dotemacs/prog/python)
@@ -42,7 +42,7 @@
 
 (defun dotemacs/repositories ()
   (message "dotemacs/repositories")
-    ;; By default, Emacs knows about GNU ELPA only, add some more repositories.
+  ;; By default, Emacs knows about GNU ELPA only, add some more repositories.
   (require 'package)
   (customize-set-variable 'package-archives
                           `(,@package-archives
@@ -63,7 +63,7 @@
     (package-install 'use-package)
 
     ;; Quelpa “is a tool to compile and install Emacs Lisp packages locally
-    ;  from local or remote source code”. No more manual package installation
+                                        ;  from local or remote source code”. No more manual package installation
     ;; This is used for example to install dired+ directly from Github.
     (package-install 'quelpa)
     (package-install 'quelpa-use-package))
@@ -124,30 +124,6 @@
     :config
     (exec-path-from-shell-initialize))
   t)
-
-
-(defun dotemacs/external-behaviour ()
-  (message "dotemacs/external-behaviour")
-
-  ;; automatically revert buffers if file contents change
-  (use-package autorevert
-    :defer 0.1)
-
-  (use-package files
-    :hook
-    (before-save . delete-trailing-whitespace)
-    :custom
-    (require-final-newline t)
-    ;; backup settings
-    (backup-by-copying t)   ;; Copy all files, don't rename them.
-    (delete-old-versions t) ;; Don't ask to delete excess backup versions.
-    (kept-new-versions 8)   ;; Number of newest versions to keep.
-    (kept-old-versions 0)   ;; Number of oldest versions to keep.
-    (version-control t)     ;; Use version numbers for backups.d
-    (backup-directory-alist
-     `((".*" . ,(locate-user-emacs-file "var/backups"))))
-    )
-  )
 
 
 (defun dotemacs/ui ()
@@ -377,11 +353,30 @@
     :hook
     (dired-mode . dired-hide-dotfiles-mode))
 
-   t)
+  t)
 
 
 (defun dotemacs/editor ()
   (message "dotemacs/editor")
+
+  (use-package files
+    :hook
+    (before-save . delete-trailing-whitespace)
+    :custom
+    (require-final-newline t)
+    ;; backup settings
+    (backup-by-copying t)   ;; Copy all files, don't rename them.
+    (delete-old-versions t) ;; Don't ask to delete excess backup versions.
+    (kept-new-versions 8)   ;; Number of newest versions to keep.
+    (kept-old-versions 0)   ;; Number of oldest versions to keep.
+    (version-control t)     ;; Use version numbers for backups.d
+    (backup-directory-alist
+     `((".*" . ,(locate-user-emacs-file "var/backups")))))
+
+  ;; automatically revert buffers if file contents change
+  (use-package autorevert
+    :init
+    (auto-revert-mode))
 
   ;; Electric Pair mode is a global minor mode.  When enabled, typing an open parenthesis
   ;; automatically inserts the corresponding closing parenthesis, and vice versa.
@@ -397,17 +392,17 @@
   (message "dotemacs/editor/fonts")
 
   (use-package faces
-  :defer t
-  :custom
-  (face-font-family-alternatives
-   '(("Monospace" "Hack" "Ubuntu Mono")
-     ("Monospace Serif" "Monospace")
-     ("Serif" "DejaVu Serif" "Times New Roman" "serif")))
-  :custom-face
-  (variable-pitch ((t (:family "Serif" :height 120))))
-  (fixed-pitch ((t (:family "Monospace Serif" :height 110))))
-  (font-lock-comment-face ((t (:family "Monospace Serif" :height 110))))
-  (default ((t (:family "Monospace Serif" :height 130)))))
+    :defer t
+    :custom
+    (face-font-family-alternatives
+     '(("Monospace" "Hack" "Ubuntu Mono")
+       ("Monospace Serif" "Monospace")
+       ("Serif" "DejaVu Serif" "Times New Roman" "serif")))
+    :custom-face
+    (variable-pitch ((t (:family "Serif" :height 120))))
+    (fixed-pitch ((t (:family "Monospace Serif" :height 110))))
+    (font-lock-comment-face ((t (:family "Monospace Serif" :height 110))))
+    (default ((t (:family "Monospace Serif" :height 130)))))
   t)
 
 
@@ -435,7 +430,7 @@
   (use-package lsp-ivy
     :ensure t
     :commands lsp-ivy-workspace-symbol)
-  ; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+                                        ; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
   ;; optional if you want which-key integration
   (use-package which-key
@@ -443,10 +438,10 @@
     (which-key-mode))
 
   (use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))
+    :ensure t
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp))))
 
   ;; Autocompletion ;;
   ;; Company is a text completion framework for Emacs.
@@ -563,9 +558,20 @@
 
   t)
 
+
+(defun dotemacs/org ()
+  (use-package org
+    :init
+    (setq org-hide-emphasis-markers t)
+    :custom-face
+    (org-link ((t (:inherit Monospace :italic t))))
+    ))
+
+
 (defun dotemacs/markdown ()
   (use-package markdown-mode :ensure t)
   t)
+
 
 (defun dotemacs/mode/eshell ()
   (message "dotemacs/mode/eshell")
