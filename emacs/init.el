@@ -303,7 +303,9 @@
 
   (use-package paren
     :config
-    (show-paren-mode t))
+    (show-paren-mode t)
+    :custom
+    (show-paren-delay 0.3))
 
   ;; Render parens, brackets, and braces according to their depth.
   ;; Each successive level is highlighted a different color.
