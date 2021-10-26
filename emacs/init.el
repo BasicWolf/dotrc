@@ -24,12 +24,13 @@
   (dotemacs/editor/highlight)
   (dotemacs/minibuffer)
   (dotemacs/search)
-  (dotemacs/dired)
+  (dotemacs/lang)
 
   (dotemacs/prog)
   (dotemacs/prog/snippets)
 
   ;; Major editor modes
+  (dotemacs/dired)
   (dotemacs/org)
   (dotemacs/prog/docker)
   (dotemacs/prog/elisp)
@@ -378,7 +379,7 @@
 
   ;; automatically revert buffers if file contents change
   (use-package autorevert
-    :init
+    :config
     (auto-revert-mode))
 
   ;; Electric Pair mode is a global minor mode.  When enabled, typing an open parenthesis
@@ -408,6 +409,29 @@
     (default ((t (:family "Monospace Serif" :height 130)))))
   t)
 
+
+(defun dotemacs/lang ()
+  (message "dotemacs/lang")
+
+  ;; Flyspell enables on-the-fly spell checking in Emacs by the means of a minor mode.
+  ;; Flyspell highlights incorrect words as soon as they are completed or as soon as
+  ;; the cursor hits a new word.
+  (use-package flyspell
+    :defer t
+    :custom
+    ;; printing messages for every word (when checking the entire buffer)
+    ;; causes an enormous slowdown.
+    (flyspell-issue-message-flag nil)
+    (flyspell-delay 1))
+
+  ;; Correcting misspelled words with flyspell using favourite interface (IVY)
+  (use-package flyspell-correct
+    :after flyspell
+    :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+
+  (use-package flyspell-correct-ivy
+    :after flyspell-correct)
+  t)
 
 (defun dotemacs/prog ()
   (message "dotemac/prog")
