@@ -26,7 +26,7 @@
   (dotemacs/search)
   (dotemacs/lang)
 
-  (dotemacs/prog)
+  (dotemacs/prog/shared)
   (dotemacs/prog/snippets)
 
   ;; Major editor modes
@@ -433,8 +433,8 @@
     :after flyspell-correct)
   t)
 
-(defun dotemacs/prog ()
-  (message "dotemac/prog")
+(defun dotemacs/prog/shared ()
+  (message "dotemac/prog/shared")
 
   ;; Language Server Protocol support for Emacs
   ;; The idea behind LSP is to standardize the protocol for how tools and
