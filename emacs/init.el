@@ -27,6 +27,7 @@
   (dotemacs/lang)
 
   (dotemacs/prog/shared)
+  (dotemacs/prog/vc)
   (dotemacs/prog/snippets)
 
   ;; Major editor modes
@@ -306,7 +307,7 @@
     :config
     (show-paren-mode t)
     :custom
-    (show-paren-delay 0.3))
+    (show-paren-delay 0.15))
 
   ;; Render parens, brackets, and braces according to their depth.
   ;; Each successive level is highlighted a different color.
@@ -517,6 +518,21 @@
     :custom
     (projectile-completion-system 'ivy))
   t)
+
+
+(defun dotemacs/prog/vc ()
+  (message "dotemacs/prog/vc")
+
+  (use-package magit
+    :ensure t
+    :custom
+    (magit-clone-default-directory (expand-file-name "~/git"))
+    (magit-completing-read-function 'ivy-completing-read "Force Ivy usage."))
+
+  (use-package git-modes
+    :ensure t
+    :defer t)
+  )
 
 
 (defun dotemacs/prog/snippets ()
