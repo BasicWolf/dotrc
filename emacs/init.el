@@ -104,6 +104,9 @@
     :init
     (gcmh-mode 1))
 
+  ;; Project for modernizing Emacs' Package Menu. With improved appearance,
+  ;; mode-line information. Github integration, customizability, asynchronous
+  ;; upgrading, and more.
   (use-package paradox
     :ensure t
     :defer t
@@ -357,7 +360,6 @@
           ("." . dired-hide-dotfiles-mode))
     :hook
     (dired-mode . dired-hide-dotfiles-mode))
-
   t)
 
 
@@ -380,8 +382,9 @@
 
   ;; automatically revert buffers if file contents change
   (use-package autorevert
+    :defer t
     :config
-    (auto-revert-mode))
+    (global-auto-revert-mode t))
 
   ;; Electric Pair mode is a global minor mode.  When enabled, typing an open parenthesis
   ;; automatically inserts the corresponding closing parenthesis, and vice versa.
