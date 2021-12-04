@@ -38,6 +38,7 @@
   (doteamcs/prog/go)
   (dotemacs/prog/python)
   (dotemacs/prog/restructured-text)
+  (dotemacs/prog/configuration-files)
 
   (dotemacs/mode/eshell)
   t)
@@ -631,15 +632,18 @@
   (use-package pyvenv
     :ensure t
     :config
-    (pyvenv-mode 1))
+    (pyvenv-mode 1)))
 
 (defun dotemacs/prog/restructured-text ()
   (message "dotemacs/prog/restructured-text")
 
-  (use-package rst)
+  (use-package rst))
 
-  t)
+(defun dotemacs/prog/configuration-files ()
+  (message "dotemacs/prog/configuration-files")
 
+  (use-package caddyfile-mode
+    :ensure t))
 
 (defun dotemacs/org ()
   (use-package org
