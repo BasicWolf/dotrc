@@ -633,13 +633,6 @@
     :config
     (pyvenv-mode 1))
 
-  ;; Black is the uncompromising Python code formatter.
-  (use-package python-black
-    :ensure t
-    :after python
-    :hook (python-mode . python-black-on-save-mode-enable-dwim))
-  t)
-
 (defun dotemacs/prog/restructured-text ()
   (message "dotemacs/prog/restructured-text")
 
