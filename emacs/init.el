@@ -36,7 +36,7 @@
   (dotemacs/org)
   (dotemacs/prog/docker)
   (dotemacs/prog/elisp)
-  (doteamcs/prog/go)
+  ;; (doteamcs/prog/go)
   (dotemacs/prog/python)
   (dotemacs/prog/restructured-text)
   (dotemacs/prog/configuration-files)
