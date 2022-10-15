@@ -11,6 +11,7 @@
 (defvar var-dir (concat init-dir "var/"))
 
 
+
 (defun main()
   (message "Main started")
 
@@ -484,6 +485,7 @@
     :ensure t
     :bind
     (("C-<return>" . company-complete)
+     ("C-." . company-files)
      (:map company-active-map
            ("C-n" . company-select-next-or-abort)
            ("C-p" . company-select-previous-or-abort)))
@@ -531,7 +533,11 @@
     :ensure t
     :custom
     (magit-clone-default-directory (expand-file-name "~/git"))
-    (magit-completing-read-function 'ivy-completing-read "Force Ivy usage."))
+    (magit-completing-read-function 'ivy-completing-read "Force Ivy usage.")
+    ;; If I type a new branch name instead of the base branch - accept the new branch
+    ;; and ask for a base branch once again.
+    ;; See discussion at https://github.com/magit/magit/issues/3647
+    (magit-branch-read-upstream-first 'fallback))
 
   (use-package git-modes
     :ensure t
@@ -632,12 +638,17 @@
   (use-package pyvenv
     :ensure t
     :config
-    (pyvenv-mode 1)))
+    (pyvenv-mode 1))
+
+  (use-package virtualenvwrapper
+    :ensure t))
 
 (defun dotemacs/prog/restructured-text ()
   (message "dotemacs/prog/restructured-text")
 
-  (use-package rst))
+  (use-package rst
+    :hook
+    (rst-mode . flyspell-mode)))
 
 (defun dotemacs/prog/configuration-files ()
   (message "dotemacs/prog/configuration-files")
