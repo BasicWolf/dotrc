@@ -71,7 +71,6 @@ plugins=(
     gradle
     history
     ls
-#    mercurial
     virtualenvwrapper
 )
 
@@ -89,14 +88,6 @@ export MANPATH="/usr/local/man:$MANPATH"
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# MERCURIAL #
-# --------- #
-
-ZSH_THEME_HG_PROMPT_PREFIX="%{$fg_bold[magenta]%}hg:(%{$fg[red]%}"
-ZSH_THEME_HG_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_HG_PROMPT_DIRTY="%{$fg[magenta]%}) %{$fg[yellow]%}✗%{$reset_color%}"
-ZSH_THEME_HG_PROMPT_CLEAN="%{$fg[magenta]%})"
-
 
 #=== Aliases and EDITOR ===#
 export ALTERNATE_EDITOR=""
@@ -112,4 +103,5 @@ alias npm-exec='PATH=$(npm bin):$PATH'
 eval `keychain --eval --agents ssh id_rsa`
 
 
-PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)$(hg_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+PROMPT='${ret_status}%{$fg_bold[green]%}%{$fg[cyan]%}%n@%m %~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}
+$ '
