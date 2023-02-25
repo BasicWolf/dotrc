@@ -423,6 +423,7 @@
   ;; Flyspell highlights incorrect words as soon as they are completed or as soon as
   ;; the cursor hits a new word.
   (use-package flyspell
+    :ensure t
     :defer t
     :custom
     ;; printing messages for every word (when checking the entire buffer)
@@ -432,10 +433,12 @@
 
   ;; Correcting misspelled words with flyspell using favourite interface (IVY)
   (use-package flyspell-correct
+    :ensure t
     :after flyspell
     :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
   (use-package flyspell-correct-ivy
+    :ensure t
     :after flyspell-correct)
   t)
 
@@ -664,10 +667,11 @@
     (org-link ((t (:inherit Monospace :italic t))))
     ))
 
-
 (defun dotemacs/markdown ()
-  (use-package markdown-mode :ensure t)
-  t)
+  (use-package markdown-mode
+    :ensure t
+    :hook
+    (markdown-mode . flyspell-mode)))
 
 
 (defun dotemacs/mode/eshell ()
