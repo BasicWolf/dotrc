@@ -100,7 +100,7 @@ alias npm-exec='PATH=$(npm bin):$PATH'
 # alias ls="ls -F"
 
 # KeyChain for storing SSH passwords
-eval `keychain --eval --agents ssh id_rsa`
+eval `keychain --eval --agents ssh id_me`
 
 
 PROMPT='${ret_status}%{$fg_bold[green]%}%{$fg[cyan]%}%n@%m %~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}
