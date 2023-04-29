@@ -672,6 +672,7 @@
 (defun dotemacs/markdown ()
   (use-package markdown-mode
     :ensure t
+    :mode ("README\\.md\\'" . gfm-mode)  ;; github-flavored
     :hook
     (markdown-mode . flyspell-mode)
     :init
