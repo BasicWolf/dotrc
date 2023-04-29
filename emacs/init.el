@@ -394,7 +394,8 @@
     :config
     (electric-pair-mode)
     :custom
-    (electric-pair-delete-adjacent-pairs t))
+    (electric-pair-delete-adjacent-pairs t)
+    (electric-pair-preserve-balance nil))
   t)
 
 
