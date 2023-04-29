@@ -673,7 +673,9 @@
   (use-package markdown-mode
     :ensure t
     :hook
-    (markdown-mode . flyspell-mode)))
+    (markdown-mode . flyspell-mode)
+    :init
+    (setq markdown-command "multimarkdown")))
 
 
 (defun dotemacs/mode/eshell ()
