@@ -522,8 +522,9 @@
   (use-package projectile
     :defer 0.2
     :ensure t
+    :init
+    (projectile-mode +1)
     :bind
-
     (:map mode-specific-map ("p" . projectile-command-map))  ;; C-c p ...
     :custom
     (projectile-completion-system 'ivy))
