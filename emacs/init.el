@@ -159,7 +159,8 @@
 
     :bind
     ;; kill current buffer, without prompting
-    (("\C-xk" . (lambda () (interactive) (kill-buffer (current-buffer))))))
+    (("\C-xk" . (lambda () (interactive) (kill-buffer (current-buffer))))
+     ("\C-xwd" . 'delete-trailing-whitespace)))
 
   ;; Enable shift-arrows switching between windows
   (use-package windmove
