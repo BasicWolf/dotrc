@@ -273,7 +273,10 @@
     (ivy-count-format "%d/%d ")   ;; ivy completions counter format, e.g. 2/9
     (ivy-use-selectable-prompt t) ;; "Make the prompt line selectable"
     :config
-    (ivy-mode t))
+    (ivy-mode t)
+
+    ;; CHEATSHEET: ivy-immediate-done is bound to C-M-j
+    )
 
   ;; TODO
   (use-package ivy-xref
