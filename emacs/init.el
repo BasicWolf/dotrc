@@ -38,6 +38,7 @@
   (dotemacs/prog/elisp)
   ;; (doteamcs/prog/go)
   (dotemacs/prog/python)
+  (dotemacs/prog/js)
   (dotemacs/prog/restructured-text)
   (dotemacs/prog/configuration-files)
 
@@ -654,6 +655,13 @@
   (use-package rst
     :hook
     (rst-mode . flyspell-mode)))
+
+(defun dotemacs/prog/js ()
+  (message "dotemacs/prog/js")
+
+  (use-package json-mode
+    :ensure t
+    :mode ("\\.json?\\'" . json-mode)))
 
 (defun dotemacs/prog/configuration-files ()
   (message "dotemacs/prog/configuration-files")
