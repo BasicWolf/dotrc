@@ -70,7 +70,6 @@ plugins=(
     git-extras
     gradle
     history
-    ls
     virtualenvwrapper
 )
 
