@@ -5,7 +5,9 @@
 session.*
 \.lsp-session*
 tramp
-
+.emacs
+.mc-lists.el
+flycheck_init.el
 ## Individual directories ##
 
 .cache/
