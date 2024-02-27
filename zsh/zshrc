@@ -96,11 +96,10 @@ alias hgs="hg summary && hg stat"
 alias grep="grep --exclude-dir='.hg' --exclude-dir='.build'"
 alias emq="emacs -nw -q"
 alias npm-exec='PATH=$(npm bin):$PATH'
-alias ls="ls -F"
+alias ls="ls -F --color"
 
 # KeyChain for storing SSH passwords
 eval `keychain --eval --agents ssh id_me`
-
 
 PROMPT='${ret_status}%{$fg_bold[green]%}%{$fg[cyan]%}%n@%m %~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}
 $ '
