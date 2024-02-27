@@ -131,7 +131,15 @@
     :ensure t
     :defer 0.1
     :config
+
     (exec-path-from-shell-initialize))
+
+  (use-package keychain-environment
+    :ensure t
+    :defer 0.1
+    :init
+    (keychain-refresh-environment) ;; load SSH environmental variables from user shell
+    )
   t)
 
 
