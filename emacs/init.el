@@ -41,6 +41,7 @@
   (dotemacs/prog/js)
   (dotemacs/prog/restructured-text)
   (dotemacs/prog/configuration-files)
+  (dotemacs/prog/latex)
 
   (dotemacs/mode/eshell)
   t)
@@ -240,7 +241,10 @@
                                  ((control))))
     (mouse-wheel-progressive-speed nil))
 
-  ;; show time in bottom bar
+  ;; keyboard scroll one line at a time
+  (setq scroll-step 1)
+
+  ;; show time in bottom bbar
   (use-package time
     :defer t
     :custom
@@ -748,5 +752,16 @@
     ("M-`" . eshell-toggle))
   t)
 
+(defun dotemacs/prog/latex ()
+  (message "dotemacs/prog/latex")
+  (use-package tex
+    :pin gnu
+    :ensure auctex
+    :mode ("\\.tex\\$" . latex-mode)
+    :custom
+    (TeX-auto-save t)
+    (TeX-parse-self t)
+    (TeX-master nil)
+    ))
 
 (main)
