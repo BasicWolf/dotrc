@@ -65,6 +65,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     aws
+    direnv
     dotenv
     git
     git-extras
