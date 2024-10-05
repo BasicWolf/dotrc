@@ -555,6 +555,12 @@
     (:map mode-specific-map ("p" . projectile-command-map))  ;; C-c p ...
     :custom
     (projectile-completion-system 'ivy))
+
+  ;; Set per-buffer environment variables, requires direnv
+  ;; Use case: e.g. virtualenv
+  (use-package envrc
+    :ensure t
+    :hook (after-init . envrc-global-mode))
   t)
 
 
