@@ -700,6 +700,9 @@
   (use-package org
     :init
     (setq org-hide-emphasis-markers t)
+    :custom
+    (org-hide-emphasis-markers t)
+    (org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "IN PROGRESS(p!)" "|" "DONE(d!)" "CANCELED(c@)")))
     :custom-face
     (org-link ((t (:inherit Monospace :italic t))))
     ))
