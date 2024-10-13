@@ -387,7 +387,8 @@
 
   (use-package files
     :hook
-    (before-save . delete-trailing-whitespace)
+    (before-save . (lambda () (unless (derived-mode-p 'markdown-mode)
+                             (delete-trailing-whitespace))))
     :custom
     (require-final-newline t)
     ;; backup settings
