@@ -709,8 +709,13 @@
     :custom
     (org-hide-emphasis-markers t)
     (org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "IN PROGRESS(p!)" "|" "DONE(d!)" "CANCELED(c@)")))
+    (org-clock-persist 'history)  ;; Save the clock history across Emacs sessions
+    (calendar-week-start-day 1)   ;; Start Calendar week on Monday
     :custom-face
     (org-link ((t (:inherit Monospace :italic t))))
+    :init
+    (org-clock-persistence-insinuate) ;; Save the clock history across Emacs sessions
+    (org-indent-mode)                 ;; Display buffer in indented view
     ))
 
 (defun dotemacs/markdown ()
