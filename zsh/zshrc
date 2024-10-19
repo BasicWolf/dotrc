@@ -103,7 +103,7 @@ alias hgs="hg summary && hg stat"
 alias grep="grep --exclude-dir='.hg' --exclude-dir='.build'"
 alias emq="emacs -nw -q"
 alias npm-exec='PATH=$(npm bin):$PATH'
-alias ls="ls -F --color"
+alias ls="ls -F --color --group-directories-first"
 
 # KeyChain for storing SSH passwords
 eval `keychain --eval --agents ssh id_me`
