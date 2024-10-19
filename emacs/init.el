@@ -370,7 +370,9 @@
     (dired-recursive-copies 'top)
     (dired-recursive-deletes 'top)
     (diredp-hide-details-initially-flag nil)
-    (dired-listing-switches "-alh --group-directories-first"))
+    (dired-listing-switches "-alh --group-directories-first")
+    :config
+    (diredp-toggle-find-file-reuse-dir 1))
 
   (use-package dired-hide-dotfiles
     :ensure t
