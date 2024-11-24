@@ -181,6 +181,7 @@
     :config
     (winner-mode 1))
 
+
   (use-package tabbar
     :ensure
     :bind
@@ -414,8 +415,11 @@
     :config
     (electric-pair-mode)
     :custom
-    (electric-pair-delete-adjacent-pairs t)
-    (electric-pair-preserve-balance nil))
+    (electric-pair-delete-adjacent-pairs t)      ;; backspacing between two adjacent delimiters also automatically delete the closing delimiter
+    (electric-pair-preserve-balance t)           ;; balance out the number of opening and closing delimiters
+    (electric-pair-open-newline-between-pairs t) ;; inserting a newline between two adjacent pairs also automatically open an extra newline after point.
+    (electric-pair-skip-whitespace t))           ;; skip whitespace forward before deciding whether to skip over the closing delimiter.
+
 
   (use-package multiple-cursors
     :ensure   t
