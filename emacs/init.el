@@ -584,11 +584,20 @@
     ;; See discussion at https://github.com/magit/magit/issues/3647
     (magit-branch-read-upstream-first 'fallback))
 
+  ;; Emacs major modes for various Git configuration files
   (use-package git-modes
     :ensure t
     :defer t)
-  )
 
+  ;; Highlights diff compared to file in VCS
+  (use-package diff-hl
+    :ensure t
+    :init
+    (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+    :config
+    (global-diff-hl-mode))
+  )
 
 (defun dotemacs/prog/snippets ()
   (message "dotemacs/prog/snippets")
