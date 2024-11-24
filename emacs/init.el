@@ -595,6 +595,10 @@
     :init
     (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+    :custom-face
+    (diff-hl-change ((t (:background "#3a81c3"))))
+    (diff-hl-insert ((t (:background "#7ccd7c"))))
+    (diff-hl-delete ((t (:background "#ff7272"))))
     :config
     (global-diff-hl-mode))
   )
