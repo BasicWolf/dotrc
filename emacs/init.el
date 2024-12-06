@@ -491,6 +491,7 @@
     :hook ((python-mode . lsp)
            (go-mode . lsp)
            (lsp-mode . lsp-enable-which-key-integration))
+    :bind (:map python-mode-map ("C-c ." . lsp-goto-type-definition))
     :commands lsp)
 
   ;; Contains all the higher level UI modules of lsp-mode,
