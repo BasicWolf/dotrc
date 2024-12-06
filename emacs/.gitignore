@@ -22,7 +22,6 @@ tramp/
 transient/
 var/
 eln-cache/
-projects/
 
 ## Individual files ##
 ----------------------
@@ -34,5 +33,5 @@ custom.el
 org-clock-save.el
 projectile-bookmarks.eld
 projectile.cache
-
+projects
 bookmarks
