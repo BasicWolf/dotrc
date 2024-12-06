@@ -21,6 +21,8 @@ quelpa/
 tramp/
 transient/
 var/
+eln-cache/
+projects/
 
 ## Individual files ##
 ----------------------
