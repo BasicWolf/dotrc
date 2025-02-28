@@ -697,10 +697,23 @@
   (use-package pyvenv
     :ensure t
     :config
-    (pyvenv-mode 1))
+    (pyvenv-mode 1)
+    :hook
+    (pyvenv-post-activate-hooks
+     .
+     (lambda ()
+       (when (bound-and-true-p lsp-mode) (lsp)))))
 
   (use-package virtualenvwrapper
-    :ensure t))
+    :ensure t)
+
+  ;; requires tree-sitter-python e.g. from OS packages
+  (use-package python-pytest
+    :ensure t
+    :bind
+    (:map python-mode-map
+          ("C-c t d" . python-pytest-dispatch)
+          ("C-c t t" . python-pytest-run-def-or-class-at-point)))
 
 (defun dotemacs/prog/restructured-text ()
   (message "dotemacs/prog/restructured-text")
