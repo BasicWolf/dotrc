@@ -1,4 +1,4 @@
-;; After 10+ years of my old .emacs, I have to start from a complete scratch :)
+\;; After 10+ years of my old .emacs, I have to start from a complete scratch :)
 ;; The goal is to keep only the necessary stuff in a clean manner.
 ;; Good luck to me!
 ;; Inspired by
@@ -98,8 +98,6 @@
     :ensure t
     :custom
     (system-packages-noconfirm t))
-
-  (use-package use-package-ensure-system-package :ensure t)
 
   ;; GCMH - the Garbage Collector Magic Hack
   ;; https://gitlab.com/koral/gcmh
