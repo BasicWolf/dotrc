@@ -1,4 +1,0 @@
-setxkbmap -layout us,ru,fi -variant ,phonetic, -model pc105 -option ctrl:nocaps -option terminate:ctrl_alt_bksp -option grp:shifts_toggle
-
-# Or use locatectl to make an /etc/X11/xorg.conf.d/00-keyboard.conf
-# localectl --no-convert set-x11-keymap us,ru,fi ,phonetic, pc105 ctrl:nocaps,terminate:ctrl_alt_bksp,grp:shifts_toggle
