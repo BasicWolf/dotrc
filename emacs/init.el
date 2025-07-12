@@ -70,7 +70,7 @@
     (package-install 'use-package)
 
     ;; Quelpa “is a tool to compile and install Emacs Lisp packages locally
-                                        ;  from local or remote source code”. No more manual package installation
+    ;; from local or remote source code”. No more manual package installation
     ;; This is used for example to install dired+ directly from Github.
     (package-install 'quelpa)
     (package-install 'quelpa-use-package))
@@ -713,7 +713,7 @@
     :bind
     (:map python-mode-map
           ("C-c t d" . python-pytest-dispatch)
-          ("C-c t t" . python-pytest-run-def-or-class-at-point)))
+          ("C-c t t" . python-pytest-run-def-or-class-at-point))))
 
 (defun dotemacs/prog/restructured-text ()
   (message "dotemacs/prog/restructured-text")
