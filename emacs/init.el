@@ -1,4 +1,4 @@
-\;; After 10+ years of my old .emacs, I have to start from a complete scratch :)
+;; After 10+ years of my old .emacs, I have to start from a complete scratch :)
 ;; The goal is to keep only the necessary stuff in a clean manner.
 ;; Good luck to me!
 ;; Inspired by
@@ -444,7 +444,7 @@
     :custom-face
     (variable-pitch ((t (:family "Serif" :height 120))))
     (fixed-pitch ((t (:family "Monospace Serif" :height 110))))
-    (font-lock-comment-face ((t (:family "Monospace Serif" :height 110))))
+    (font-lock-comment-face ((t (:family "Monospace Serif" :height 120))))
     (default ((t (:family "Monospace Serif" :height 130)))))
   t)
 
