@@ -492,6 +492,14 @@
     :bind ("C-c ." . lsp-goto-type-definition)
     :commands lsp)
 
+  ;; lsp-mode client leveraging pyright and basedpyright language server.
+  (use-package lsp-pyright
+    :ensure t
+    :custom (lsp-pyright-langserver-command "basedpyright") ;; or pyright
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp))))
+
   ;; Contains all the higher level UI modules of lsp-mode,
   ;; like flycheck support and code lenses.
   (use-package lsp-ui
