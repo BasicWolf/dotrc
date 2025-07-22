@@ -1,0 +1,6 @@
+# I need to visually hint myself that I am working as root
+COLOUR_RED="\[\033[31m\]"
+COLOUR_RED_BOLD="\[\033[1;31m\]"
+COLOUR_RESTORE="\[\033[0m\]"
+
+PS1=$COLOUR_RED_BOLD'\u@\h'$COLOUR_RESTORE':\w\$ '
