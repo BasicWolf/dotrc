@@ -1,114 +1,126 @@
-#    -*- mode: shell-script -*-
-# If you come from bash you might have to change your $PATH.
-export PATH=$PATH:/opt/pycharm/bin
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
 
-# Path to your oh-my-zsh installation.
-export ZSH=/home/zaur/.oh-my-zsh
+# Use Emacs-like keymap in shell
+bindkey -e
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=21
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    aws
-    direnv
-    git
-    git-extras
-    history
-)
-
-source $ZSH/oh-my-zsh.sh
+# Load colors and inititalize `color` associative array
+# Usage example: echo $fg_bold[red] test $reset_color
+autoload colors
+colors
 
 
-# ===================
-# User  configuration
 
-setopt HIST_IGNORE_SPACE
-setopt share_history
+# Completions #
+# =========== #
 
-export MANPATH="/usr/local/man:$MANPATH"
+# Configures compinstall to record where it previously
+# set the zstyles for itself (if any).
+# This way we can run compinstall again and modify
+# the existing configuration.
+zstyle :compinstall filename '/home/zaur/.zshrc'
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# Loads the compinit function into the shell.
+# autoload tells Zsh to load the function only when it's first used.
+# -U flag ensures the function is not modified by the shell (i.e., it's used as-is).
+# -z flag is specific to Zsh and is used to load Zsh-specific functions.
+autoload -Uz compinit
+
+# Initializes the Zsh completion system.
+compinit
 
 
-#=== pyenv ===#
+# VCS INFO #
+# ======== #
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+# Configure the format of VCS info for Git repositories. The formats '%b' specifies
+# that only the branch name (%b is a format specifier for the current branch)
+# should be displayed in ${vcs_info_msg_0_}.
+zstyle ':vcs_info:git:*' formats ' (%F{red}%b%f)'
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Prompt #
+# ------ #
+# This enables the prompt_subst option in Zsh, allowing parameter expansions (like variables)
+# and command substitutions to be evaluated in the prompt strings.
+# This is necessary for dynamically displaying VCS info.
+setopt prompt_subst
+
+PROMPT=$'%n@%m %/$vcs_info_msg_0_\n$ '
 
 
-#=== Aliases and EDITOR ===#
-export ALTERNATE_EDITOR=""
-export EDITOR="emacs -nw -q"
+# Direnv #
+# ------ #
+eval "$(direnv hook zsh)"
 
-alias hgs="hg summary && hg stat"
-alias grep="grep --exclude-dir='.hg' --exclude-dir='.build'"
-alias e="emacs -nw -q"
-alias npm-exec='PATH=$(npm bin):$PATH'
-alias ls="ls -F --color --group-directories-first"
-
-# KeyChain for storing SSH passwords
-eval `keychain --eval --agents ssh id_me`
-
-PROMPT='${ret_status}%{$fg_bold[green]%}%{$fg[cyan]%}%n@%m %~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}
-$ '
-
-#=== direnv customization, since direnv doesn't allow PS1 change ===#
 show_virtual_env() {
   if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-    echo "($(basename $VIRTUAL_ENV)) "
+    echo "($(basename $VIRTUAL_ENV))"
   fi
 }
-PS1='$(show_virtual_env)'$PS1
+PROMPT='$(show_virtual_env)'$PROMPT
+
+
+# Window title #
+# -----------  #
+_show_title(){
+  print -Pn "\033]0;${PROMPT_TITLE:-"$USER:%~"}\007"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _show_title
+_show_title
+
+
+# Alternatives  #
+# ============= #
+
+# cd -> zovide #
+# ------------ #
+# must come after compinit
+eval "$(zoxide init zsh)"
+
+
+# ls -> eza #
+# --------- #
+
+eza_params=(
+    '--git'
+    '--icons'
+    '--group'
+    '--group-directories-first'
+    '--colour-scale=all'
+    '--colour-scale-mode=fixed'
+)
+
+
+alias ls='eza $eza_params'
+alias l='eza --git-ignore $eza_params'
+alias ll='eza --long $eza_params'
+alias la='eza --all --header --long --sort=modified $eza_params'
+#
+alias lla='eza -lbhHigUmuSa'
+alias lx='eza -lbhHigUmuSa@'
+alias lt='eza --tree $eza_params'
+alias tree='eza --tree $eza_params'
+
+
+alias cd=z
+alias cat='echo "$fg_bold[green]#=====Try an alternative: bat=====#\n $reset_color"; cat'
+# alias cd='echo "$fg_bold[green]#=====Try an alternative: z (zoxide)=====#\n $reset_color"; cd'
+alias df='echo "$fg_bold[green]#=====Try an alternative: duf=====#\n $reset_color"; df'
+alias du='echo "$fg_bold[green]#=====Try an alternative: dust=====#\n $reset_color"; du'
+# fd examples: https://www.reddit.com/r/commandline/comments/uibug7/fd_find_but_better/
+alias find='echo "$fg_bold[green]#=====Try an alternative: fd=====#\n $reset_color"; find'
+
+# fd - better find
+# -H - Include hidden files by default
+alias fd='fd -H'
+
+# Run keychain, so that I have to enter ssh key passphrase
+# only once
+eval $(keychain --eval --quiet id_ecdsa)
+
+export EDITOR=nano
