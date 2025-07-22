@@ -232,6 +232,15 @@
     ;; The brightness of the background hint to font renderer.
     (frame-background-mode 'light))
 
+  ;; Automatically  switch between dark and light mode
+  ;; base on system settings
+  (use-package auto-dark
+    :ensure t
+    :after (solarized-theme)
+    :custom
+    (auto-dark-themes '((solarized-dark) (solarized-light)))
+    :init (auto-dark-mode))
+
   ;; smooth mouse scrolling
   (use-package mwheel
     :custom
