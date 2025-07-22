@@ -3,7 +3,9 @@
     email = 1289161+BasicWolf@users.noreply.github.com
 [push]
     default = simple
-
+[pull]
+	rebase = true
+	autostash = true
 
 [alias]
     co = checkout
