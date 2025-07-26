@@ -215,6 +215,7 @@
       (add-to-list 'desktop-modes-not-to-save 'dired-mode)
       (desktop-save-mode 1)))
 
+
   (use-package solarized-theme
     :ensure
     :config
@@ -230,7 +231,16 @@
     ;; t -   draw the underline at the same height as the font’s descent line.
     (x-underline-at-descent-line t)
     ;; The brightness of the background hint to font renderer.
-    (frame-background-mode 'light))
+    (frame-background-mode 'light)
+    ;; Mark Solarized Light and Dark themes as safe to load, by explicitly
+    ;; white-listing their *.el files hashes
+    (custom-safe-themes
+     '(; solarized light
+       "2b0fcc7cc9be4c09ec5c75405260a85e41691abb1ee28d29fcd5521e4fca575b"
+       ; solarized dark
+       "7fea145741b3ca719ae45e6533ad1f49b2a43bf199d9afaee5b6135fd9e6f9b8"
+       default))
+    )
 
   ;; Automatically  switch between dark and light mode
   ;; base on system settings
