@@ -1,4 +1,4 @@
 ! option          = symbols
-  rualtp:phonetic = +rualtp(phonetic)
+  ru_alternative:phonetic = +ru_alternative(phonetic)
 
 ! include %S/evdev
