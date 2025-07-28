@@ -36,7 +36,6 @@
   (dotemacs/org)
   (dotemacs/prog/docker)
   (dotemacs/prog/elisp)
-  ;; (doteamcs/prog/go)
   (dotemacs/prog/python)
   (dotemacs/prog/js)
   (dotemacs/prog/restructured-text)
@@ -673,46 +672,6 @@
     :ensure t
     :init
     (add-hook 'emacs-lisp-mode-hook (lambda () (eros-mode 1))))
-  t)
-
-
-(defun doteamcs/prog/go ()
-  ;; TODO: DOCUMENT THIS
-
-  (use-package go-mode
-    :ensure t
-    :defer t
-    :bind
-    (:map go-mode-map
-          ("M-." . godef-jump)
-          ("F11" . next-error)
-          ("F12" . previous-error))
-    :hook
-    (before-save . gofmt-before-save)
-    :custom
-    (gofmt-command "goimports")
-    :init
-    (or (getenv "GOPATH")
-        (setenv "GOPATH" (expand-file-name "~/.go")))
-    (setenv "PATH" (concat (getenv "GOPATH") "/bin" ":" (getenv "PATH"))))
-
-
-  (use-package company-go
-    :after go-mode
-    :ensure t
-    :defer t
-    :config
-    (push 'company-go company-backends))
-
-  (use-package go-guru
-    :ensure t
-    :hook
-    (go-mode . go-guru-hl-identifier-mode))
-
-  (use-package flycheck-golangci-lint
-    :ensure t
-    :hook
-    (go-mode . flycheck-golangci-lint-setup))
   t)
 
 
