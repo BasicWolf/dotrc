@@ -1,19 +1,20 @@
 // Keyboard layout for my personal alternative
 // Russian Phonetic
 
-// ёЁ 1! 2@ 3# 4$ 5% 6" 7& 8* 9( 0) -_ ъЪ
+// ёЁ 1! 2@ 3# 4$ 5" 6: 7& 8* 9( 0) -_ ъЪ
 //    яЯ шШ рР тТ ыЫ уУ иИ оО пП юЮ щЩ эЭ
 //    аА сС дД фФ гГ чЧ йЙ кК лЛ жЖ ьЬ
 //    зЗ хХ цЦ вВ бБ нН мМ ,< .> /?
 
-partial alphanumeric_keys
+default partial alphanumeric_keys
 xkb_symbols "phonetic" {
     name[Group1]= "Russian Alternative Phonetic";
 
     include "us(basic)"
 
     key <TLDE>	{[       Cyrillic_io,       Cyrillic_IO ]};
-    key <AE06>	{[                 6,          quotedbl ]};
+    key <AE05>	{[	               5,          quotedbl	]};
+    key <AE06>	{[                 6,          colon ]};
     key <AE12>	{[ Cyrillic_hardsign, Cyrillic_HARDSIGN ]};
 
     key <LatQ>	{[       Cyrillic_ya,       Cyrillic_YA ]};
