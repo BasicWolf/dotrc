@@ -119,6 +119,10 @@ alias find='echo "$fg_bold[green]#=====Try an alternative: fd=====#\n $reset_col
 # -H - Include hidden files by default
 alias fd='fd -H'
 
+
+alias grep='grep --color'
+alias archnews='yay -Pw'
+
 # Run keychain, so that I have to enter ssh key passphrase
 # only once
 eval $(keychain --eval --quiet id_ecdsa)
