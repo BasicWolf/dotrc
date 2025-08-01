@@ -38,6 +38,7 @@
   (dotemacs/prog/elisp)
   (dotemacs/prog/python)
   (dotemacs/prog/js)
+  (dotemacs/prog/shell)
   (dotemacs/prog/restructured-text)
   (dotemacs/prog/configuration-files)
   (dotemacs/prog/latex)
@@ -698,6 +699,12 @@
     (:map python-mode-map
           ("C-c t d" . python-pytest-dispatch)
           ("C-c t t" . python-pytest-run-def-or-class-at-point))))
+
+(defun dotemacs/prog/shell ()
+  (use-package sh-script
+    :mode (("zshrc" . sh-mode)
+           ("\\.zsh\\'" . sh-mode))))
+
 
 (defun dotemacs/prog/restructured-text ()
   (message "dotemacs/prog/restructured-text")
