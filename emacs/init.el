@@ -151,6 +151,7 @@
     (toggle-indicate-empty-lines)    ;; show the empty lines at the end (bottom) of the buffer
     (blink-cursor-mode 0)            ;; the blinking cursor is pretty annoying, so disable it.
     (tool-bar-mode 0)                ;; disable toolbar
+    (menu-bar-mode 0)                ;; disable menu bar
     (global-prettify-symbols-mode t) ;; render "lambda" as λ
     :custom
     (show-trailing-whitespace t)     ;; show trailing whitespace in all modes
