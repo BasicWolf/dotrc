@@ -122,6 +122,7 @@ alias fd='fd -H'
 
 alias grep='grep --color'
 alias archnews='yay -Pw'
+alias yayclean='yay -Sc --aur'
 
 # Run keychain, so that I have to enter ssh key passphrase
 # only once
