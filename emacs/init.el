@@ -689,9 +689,6 @@
      (lambda ()
        (when (bound-and-true-p lsp-mode) (lsp)))))
 
-  (use-package virtualenvwrapper
-    :ensure t)
-
   ;; requires tree-sitter-python e.g. from OS packages
   (use-package python-pytest
     :ensure t
