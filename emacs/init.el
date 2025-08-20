@@ -534,18 +534,17 @@
   (use-package lsp-ivy
     :ensure t
     :commands lsp-ivy-workspace-symbol)
-                                        ; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+  (use-package lsp-treemacs
+    :ensure t
+    :config
+    (lsp-treemacs-sync-mode 1)
+    :commands lsp-treemacs-errors-list)
 
   ;; optional if you want which-key integration
   (use-package which-key
     :config
     (which-key-mode))
-
-  (use-package lsp-pyright
-    :ensure t
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-pyright)
-                           (lsp))))
 
   ;; Autocompletion ;;
   ;; Company is a text completion framework for Emacs.
@@ -575,6 +574,12 @@
     :ensure t
     :hook
     (prog-mode . flycheck-mode))
+
+
+  ;; Treemacs is a file and project explorer similar to NeoTree or vim’s NerdTree
+  (use-package treemacs
+    :custom
+    (treemacs-project-follow-mode 1))
 
   ;; projectile
 
