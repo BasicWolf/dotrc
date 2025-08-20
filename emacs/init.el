@@ -14,6 +14,7 @@
 
 (defun main()
   (message "Main started")
+  (dotemacs/custom)
 
   (dotemacs/repositories)
   (dotemacs/package-management)
@@ -46,6 +47,10 @@
   (dotemacs/mode/eshell)
   t)
 
+
+(defun dotemacs/custom ()
+  (setq-default custom-file "~/.emacs.d/custom.el")
+  (load custom-file))
 
 (defun dotemacs/repositories ()
   (message "dotemacs/repositories")
@@ -274,10 +279,11 @@
 
 
 (defun dotemacs/ux ()
-  (use-package cus-edit
-    :defer t
-    :custom
-    (custom-file null-device)) ;; "Don't store customizations"
+  (setq-default
+   confirm-kill-processes nil    ;; exit emacs without asking to kill processes
+   ring-bell-function 'ignore    ;; prevent beep sound.
+   inhibit-startup-screen t      ;; hide startup screen
+   initial-scratch-message nil)  ;; no text in scratch buffer
 
   ;; A fantastic mode which shows key combination completions in minibuffer
   (use-package which-key
