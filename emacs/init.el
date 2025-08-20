@@ -152,6 +152,7 @@
 
   (use-package emacs
     :init
+    (setq fast-but-imprecise-scrolling t)  ;; supposed to make scrolling faster on hold
     (fset 'yes-or-no-p 'y-or-n-p)    ;; replace yes/no questions with y/n
     (toggle-indicate-empty-lines)    ;; show the empty lines at the end (bottom) of the buffer
     (blink-cursor-mode 0)            ;; the blinking cursor is pretty annoying, so disable it.
@@ -418,6 +419,7 @@
                              (delete-trailing-whitespace))))
     :custom
     (require-final-newline t)
+    (create-lockfiles nil)     ;; .#locked-file-name
     ;; backup settings
     (backup-by-copying t)   ;; Copy all files, don't rename them.
     (delete-old-versions t) ;; Don't ask to delete excess backup versions.
