@@ -60,7 +60,7 @@ show_virtual_env() {
     echo "($(basename $VIRTUAL_ENV))"
   fi
 }
-PROMPT='$(show_virtual_env)'$PROMPT
+PROMPT='$(show_virtual_env) '$PROMPT
 
 
 # Window title #
@@ -128,4 +128,4 @@ alias yayclean='yay -Sc --aur'
 # only once
 eval $(keychain --eval --quiet id_ecdsa)
 
-export EDITOR=nano
+export EDITOR="nano -Ynone"
