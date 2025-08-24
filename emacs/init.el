@@ -413,6 +413,11 @@
 (defun dotemacs/editor ()
   (message "dotemacs/editor")
 
+  ; When the lines in a file are so long that performance could suffer to an
+  ; unacceptable degree, we say "so long" to the slow modes and options enabled
+  ; in that buffer, and invoke something much more basic in their place.
+  (global-so-long-mode)
+
   (use-package files
     :hook
     (before-save . (lambda () (unless (derived-mode-p 'markdown-mode)
@@ -445,7 +450,6 @@
     (electric-pair-preserve-balance t)           ;; balance out the number of opening and closing delimiters
     (electric-pair-open-newline-between-pairs t) ;; inserting a newline between two adjacent pairs also automatically open an extra newline after point.
     (electric-pair-skip-whitespace t))           ;; skip whitespace forward before deciding whether to skip over the closing delimiter.
-
 
   (use-package multiple-cursors
     :ensure   t
