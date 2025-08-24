@@ -186,7 +186,6 @@
     :config
     (winner-mode 1))
 
-
   (use-package tabbar
     :ensure
     :bind
@@ -581,13 +580,24 @@
     :hook
     (prog-mode . flycheck-mode))
 
-
   ;; Treemacs is a file and project explorer similar to NeoTree or vim’s NerdTree
   (use-package treemacs
     :custom
-    (treemacs-project-follow-mode 1))
+    (treemacs-project-follow-mode 1)
+    :config
+    (progn
+      (setq
+       treemacs-git-mode 'deferred
+       treemacs-hide-gitignored-files-mode 1))
+    :hook
+    (emacs-startup . treemacs-start-on-boot)
+    (treemacs-mode . (lambda () (text-scale-decrease 2))))
 
   ;; projectile
+
+  (use-package treemacs-projectile
+    :after (treemacs projectile)
+    :ensure t)
 
   ;; Trigger different comment actions taking the current location
   ;; of the point into acount.
@@ -611,7 +621,8 @@
   (use-package envrc
     :ensure t
     :hook (after-init . envrc-global-mode))
-  t)
+
+  "dotemacs/prog/shared")
 
 
 (defun dotemacs/prog/vc ()
