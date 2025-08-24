@@ -413,9 +413,9 @@
 (defun dotemacs/editor ()
   (message "dotemacs/editor")
 
-  ; When the lines in a file are so long that performance could suffer to an
-  ; unacceptable degree, we say "so long" to the slow modes and options enabled
-  ; in that buffer, and invoke something much more basic in their place.
+  ;; When the lines in a file are so long that performance could suffer to an
+  ;; unacceptable degree, we say "so long" to the slow modes and options enabled
+  ;; in that buffer, and invoke something much more basic in their place.
   (global-so-long-mode)
 
   (use-package files
