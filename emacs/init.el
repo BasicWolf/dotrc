@@ -186,17 +186,17 @@
     :config
     (winner-mode 1))
 
-  (use-package tabbar
-    :ensure
-    :bind
-    (("M-<up>" . 'tabbar-backward-tab)
-     ("M-<down>" . 'tabbar-forward-tab)
-     ("M-S-<up>" . 'tabbar-backward-group)
-     ("M-S-<down>" . 'tabbar-forward-group))
-    :custom
-    (tabbar-mode t)               ;; enable tabbar mode
-    (tabbar-use-images nil)       ;; speed up thing displaying characters instead of images in left-top corner
-    (tabbar-cycle-scope 'tabs))   ;; cycle through tabs of current group
+  ;; (use-package tabbar
+  ;;   :ensure
+  ;;   :bind
+  ;;   (("M-<up>" . 'tabbar-backward-tab)
+  ;;    ("M-<down>" . 'tabbar-forward-tab)
+  ;;    ("M-S-<up>" . 'tabbar-backward-group)
+  ;;    ("M-S-<down>" . 'tabbar-forward-group))
+  ;;   :custom
+  ;;   (tabbar-mode t)               ;; enable tabbar mode
+  ;;   (tabbar-use-images nil)       ;; speed up thing displaying characters instead of images in left-top corner
+  ;;   (tabbar-cycle-scope 'tabs))   ;; cycle through tabs of current group
 
   (use-package desktop
     :config
