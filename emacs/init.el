@@ -584,14 +584,14 @@
   (use-package treemacs
     :custom
     (treemacs-project-follow-mode 1)
-    :config
-    (progn
-      (setq
-       treemacs-git-mode 'deferred
-       treemacs-hide-gitignored-files-mode 1))
+    (treemacs-git-mode 'deferred)
+    (treemacs-hide-gitignored-files-mode 1)
     :hook
     (emacs-startup . treemacs-start-on-boot)
-    (treemacs-mode . (lambda () (text-scale-decrease 2))))
+    (treemacs-mode . (lambda () (text-scale-decrease 2)))
+    :bind
+    (:map global-map
+          ("C-x t t" . treemacs)))
 
   ;; projectile
 
