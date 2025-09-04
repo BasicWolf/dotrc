@@ -476,6 +476,11 @@
     (variable-pitch ((t (:family "Serif" :height 120))))
     (fixed-pitch ((t (:family "Monospace Serif" :height 110))))
     (font-lock-comment-face ((t (:family "Monospace Serif" :height 120))))
+    (mode-line ((t (:family "Monospace Serif" :height 90))))
+    (mode-line-buffer-id ((t (:family "Monospace Serif" :height 90))))
+    (mode-line-emphasis ((t (:family "Monospace Serif" :height 90))))
+    (mode-line-highlight ((t (:family "Monospace Serif" :height 90))))
+    (mode-line-inactive ((t (:family "Monospace Serif" :height 90))))
     (default ((t (:family "Monospace Serif" :height 130)))))
   t)
 
