@@ -590,6 +590,7 @@
     :custom
     (treemacs-project-follow-mode 1)
     (treemacs-git-mode 'deferred)
+    :config
     (treemacs-hide-gitignored-files-mode 1)
     :hook
     (emacs-startup . treemacs-start-on-boot)
