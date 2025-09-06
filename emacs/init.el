@@ -725,10 +725,23 @@
   ;; requires tree-sitter-python e.g. from OS packages
   (use-package python-pytest
     :ensure t
+    :after python
     :bind
     (:map python-mode-map
           ("C-c t d" . python-pytest-dispatch)
-          ("C-c t t" . python-pytest-run-def-or-class-at-point))))
+          ("C-c t t" . python-pytest-run-def-or-class-at-point))
+    :hook
+    (python-pytest-finished-hook
+     .
+     (lambda ()
+       (unless (with-current-buffer (current-buffer)
+                 (save-excursion
+                   (goto-char (point-min))
+                   (re-search-forward "[[:digit:]] failed" nil t)))
+         (run-with-timer 1 nil #'delete-window (get-buffer-window (current-buffer)))))))
+
+  "dotemacs/prog/python")
+
 
 (defun dotemacs/prog/shell ()
   (use-package sh-script
