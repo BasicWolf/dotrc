@@ -511,6 +511,7 @@
     :after flyspell-correct)
   t)
 
+
 (defun dotemacs/prog/shared ()
   (message "dotemac/prog/shared")
 
@@ -758,6 +759,7 @@
     (rst-mode . flyspell-mode)
     (rst-mode . visual-line-mode)))
 
+
 (defun dotemacs/prog/js ()
   (message "dotemacs/prog/js")
 
@@ -765,11 +767,13 @@
     :ensure t
     :mode ("\\.json?\\'" . json-mode)))
 
+
 (defun dotemacs/prog/configuration-files ()
   (message "dotemacs/prog/configuration-files")
 
   (use-package caddyfile-mode
     :ensure t))
+
 
 (defun dotemacs/org ()
   (use-package org
@@ -786,6 +790,7 @@
     (org-clock-persistence-insinuate) ;; Save the clock history across Emacs sessions
     (org-indent-mode)                 ;; Display buffer in indented view
     ))
+
 
 (defun dotemacs/markdown ()
   (use-package markdown-mode
@@ -835,6 +840,7 @@
     ("M-`" . eshell-toggle))
   t)
 
+
 (defun dotemacs/prog/latex ()
   (message "dotemacs/prog/latex")
   (use-package tex
@@ -845,6 +851,8 @@
     (TeX-auto-save t)
     (TeX-parse-self t)
     (TeX-master nil)
-    ))
+    )
+  "dotemacs/prog/latex")
+
 
 (main)
