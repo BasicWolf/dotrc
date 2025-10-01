@@ -174,7 +174,9 @@
     :bind
     ;; kill current buffer, without prompting
     (("\C-xk" . (lambda () (interactive) (kill-buffer (current-buffer))))
-     ("\C-xwd" . 'delete-trailing-whitespace)))
+     ("\C-xwd" . 'delete-trailing-whitespace)
+     ("C-h" . delete-backward-char)
+     ("C-x h" . help-command)))
 
   ;; Enable shift-arrows switching between windows
   (use-package windmove
@@ -410,6 +412,7 @@
 
 
 (defun dotemacs/editor ()
+
   (message "dotemacs/editor")
 
   ;; When the lines in a file are so long that performance could suffer to an
@@ -755,9 +758,13 @@
   (message "dotemacs/prog/restructured-text")
 
   (use-package rst
+    :custom
+    (word-wrap nil)
     :hook
     (rst-mode . flyspell-mode)
-    (rst-mode . visual-line-mode)))
+    (rst-mode . visual-line-mode)
+    ;(rst-mode . (lambda () (setq word-wrap nil)))
+    ))
 
 
 (defun dotemacs/prog/js ()
