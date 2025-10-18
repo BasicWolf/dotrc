@@ -43,6 +43,7 @@
   (dotemacs/prog/restructured-text)
   (dotemacs/prog/configuration-files)
   (dotemacs/prog/latex)
+  (dotemacs/prog/rust)
 
   (dotemacs/mode/eshell)
   t)
@@ -527,6 +528,7 @@
     ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
     (setq lsp-keymap-prefix "C-c l")
     :hook ((python-mode . lsp)
+           (rust-mode . lsp-deferred)
            (lsp-mode . lsp-enable-which-key-integration))
     :bind ("C-c ." . lsp-goto-type-definition)
     :commands lsp)
@@ -624,7 +626,8 @@
     :bind
     (:map mode-specific-map ("p" . projectile-command-map))  ;; C-c p ...
     :custom
-    (projectile-completion-system 'ivy))
+    (projectile-completion-system 'ivy)
+    (projectile-switch-project-action 'projectile-commander))
 
   ;; Set per-buffer environment variables, requires direnv
   ;; Use case: e.g. virtualenv
@@ -860,6 +863,14 @@
     (TeX-master nil)
     )
   "dotemacs/prog/latex")
+
+(defun dotemacs/prog/rust ()
+  (use-package rust-mode
+    :init
+    ;; Native treesitter mode rust-ts-mode with:
+    (setq rust-mode-treesitter-derive t))
+
+  "dotemacs/prog/rust")
 
 
 (main)
