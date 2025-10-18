@@ -11,4 +11,14 @@ the official layout, nor I'm satisfied with the phonetic
 layouts which come out of the box.
 
 **Usage:**
-Create a symlink from ~/.config/xkb (``$XDG_CONFIG_HOME``).
+Create a symlink to ``~/.config/xkb`` (``$XDG_CONFIG_HOME``).
+
+wireplumber
+===========
+
+Disable G5 USB-C audio device
+
+**Usage**
+Create a symlink to ``~/.config/wireplumber``.
+
+Restart wireplumber: ``systemctl --user restart wireplumber``
