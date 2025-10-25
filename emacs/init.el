@@ -288,6 +288,15 @@
    inhibit-startup-screen t      ;; hide startup screen
    initial-scratch-message nil)  ;; no text in scratch buffer
 
+  ;; Do not kill scratch buffer, instead bury it
+  (defun my/dont-kill-scratch ()
+    (if (not (equal (buffer-name) "*scratch*"))
+        t
+      (message "Not allowed to kill %s, burying instead" (buffer-name))
+      (bury-buffer)
+      nil))
+  (add-hook 'kill-buffer-query-functions #'my/dont-kill-scratch)
+
   ;; A fantastic mode which shows key combination completions in minibuffer
   (use-package which-key
     :ensure t
