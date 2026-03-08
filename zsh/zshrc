@@ -30,6 +30,8 @@ autoload -Uz compinit
 # Initializes the Zsh completion system.
 compinit
 
+# Load autocompletions for AWS CLI
+source /usr/bin/aws_zsh_completer.sh
 
 # VCS INFO #
 # ======== #
