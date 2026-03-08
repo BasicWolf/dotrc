@@ -644,6 +644,10 @@
     :ensure t
     :hook (after-init . envrc-global-mode))
 
+  (use-package restclient
+    :ensure t
+    :mode ("\\.http?\\'" . restclient-mode))
+
   "dotemacs/prog/shared")
 
 
