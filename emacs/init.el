@@ -656,6 +656,9 @@
 
   (use-package magit
     :ensure t
+    :bind
+    (:map magit-mode-map
+          ("C-c <tab>" . magit-section-cycle-diffs))
     :custom
     (magit-clone-default-directory (expand-file-name "~/git"))
     (magit-completing-read-function 'ivy-completing-read "Force Ivy usage.")
