@@ -881,7 +881,12 @@
   (use-package rust-mode
     :init
     ;; Native treesitter mode rust-ts-mode with:
-    (setq rust-mode-treesitter-derive t))
+    (setq rust-mode-treesitter-derive t)
+    :config
+    (setq rust-indent-offset 4)
+    (setq indent-tabs-mode nil)
+    :hook
+    (before-save-hook . lsp-format-buffer))
 
   "dotemacs/prog/rust")
 
