@@ -517,7 +517,7 @@
   (use-package flyspell-correct
     :ensure t
     :after flyspell
-    :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+    :bind (:map flyspell-mode-map ("C-M-;" . flyspell-correct-at-point)))
 
   (use-package flyspell-correct-ivy
     :ensure t
