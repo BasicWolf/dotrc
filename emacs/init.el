@@ -433,7 +433,7 @@
   (use-package files
     :hook
     (before-save . (lambda () (unless (derived-mode-p 'markdown-mode)
-                             (delete-trailing-whitespace))))
+                           (delete-trailing-whitespace))))
     :custom
     (require-final-newline t)
     (create-lockfiles nil)     ;; .#locked-file-name
