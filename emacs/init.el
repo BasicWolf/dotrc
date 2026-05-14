@@ -614,7 +614,9 @@
     (:map global-map
           ("C-x t t" . treemacs)))
 
-  ;; projectile
+  (use-package treemacs-magit
+    :after (treemacs magit)
+    :ensure t)
 
   (use-package treemacs-projectile
     :after (treemacs projectile)
