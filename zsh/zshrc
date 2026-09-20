@@ -93,8 +93,8 @@ eza_params=(
     '--icons'
     '--group'
     '--group-directories-first'
-    '--colour-scale=all'
-    '--colour-scale-mode=fixed'
+    '--color-scale=all'
+    '--color-scale-mode=fixed'
 )
 
 
