@@ -658,6 +658,11 @@
 
   (use-package magit
     :ensure t
+    :init
+    ;; Disable the slow completion-at-point function (CAPF)
+    ;; Although it might be handy to get completion of tags, branches etc.
+    (with-eval-after-load 'git-commit
+      (remove-hook 'git-commit-setup-hook #'git-commit-setup-capf))
     :bind
     (:map magit-mode-map
           ("C-c <tab>" . magit-section-cycle-diffs))
