@@ -1,3 +1,4 @@
+;;   -*- lexical-binding: t; -*-
 ;; After 10+ years of my old .emacs, I have to start from a complete scratch :)
 ;; The goal is to keep only the necessary stuff in a clean manner.
 ;; Good luck to me!
@@ -892,13 +893,25 @@
     :init
     ;; Native treesitter mode rust-ts-mode with:
     (setq rust-mode-treesitter-derive t)
+
+    (defun my/close-compilation-if-clean (buffer status)
+      (when (and (string-match-p "\\`finished" status)
+                 (with-current-buffer buffer
+                   (save-excursion
+                     (goto-char (point-min))
+                     (not (re-search-forward "\\(warning\\|error\\):" nil t)))))
+        (run-at-time 1 nil (lambda ()
+                             (delete-windows-on buffer)
+                             (kill-buffer buffer)))))
+
+    (add-hook 'compilation-finish-functions #'my/close-compilation-if-clean)
+
     :config
     (setq rust-indent-offset 4)
     (setq indent-tabs-mode nil)
     :hook
     (before-save-hook . lsp-format-buffer))
+    "dotemacs/prog/rust")
 
-  "dotemacs/prog/rust")
 
-
-(main)
+  (main)
