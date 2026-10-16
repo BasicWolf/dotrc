@@ -386,14 +386,6 @@
     :ensure t
     :hook
     (prog-mode . highlight-numbers-mode))
-
-  ;; Render TODO in comments via Italic font
-  (use-package hl-todo
-    :ensure t
-    :custom-face
-    (hl-todo ((t (:inherit hl-todo :italic t))))
-    :hook ((prog-mode . hl-todo-mode)
-           (yaml-mode . hl-todo-mode)))
   t)
 
 
