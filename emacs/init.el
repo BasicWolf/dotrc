@@ -643,6 +643,26 @@
     :ensure t
     :mode ("\\.http?\\'" . restclient-mode))
 
+  (use-package compile
+    :init
+    (defun my/close-compilation-if-clean (buffer status)
+      (when (and (eq major-mode 'compilation-mode)   ; false for grep-mode, ag-mode, rg-mode
+                 (string-match-p "\\`finished" status)
+                 (with-current-buffer buffer
+                   (save-excursion
+                     (goto-char (point-min))
+                     (not (re-search-forward "\\(warning\\|error\\):" nil t)))))
+        (run-at-time 1 nil (lambda ()
+                             (delete-windows-on buffer)
+                             (kill-buffer buffer)))))
+    (add-hook 'compilation-finish-functions #'my/close-compilation-if-clean)
+    :custom
+    (compilation-scroll-output 'first-error "Scroll output, stop at first error")
+    (compilation-auto-jump-to-first-error t "Jump to the first error when done")
+    (compilation-always-kill t "Kill the previous compilation without asking")
+    (compilation-window-height 12)
+    (compilation-context-lines 3 "Keep 3 lines of context above the error"))
+
   "dotemacs/prog/shared")
 
 
@@ -885,19 +905,6 @@
     :init
     ;; Native treesitter mode rust-ts-mode with:
     (setq rust-mode-treesitter-derive t)
-
-    (defun my/close-compilation-if-clean (buffer status)
-      (when (and (string-match-p "\\`finished" status)
-                 (with-current-buffer buffer
-                   (save-excursion
-                     (goto-char (point-min))
-                     (not (re-search-forward "\\(warning\\|error\\):" nil t)))))
-        (run-at-time 1 nil (lambda ()
-                             (delete-windows-on buffer)
-                             (kill-buffer buffer)))))
-
-    (add-hook 'compilation-finish-functions #'my/close-compilation-if-clean)
-
     :config
     (setq rust-indent-offset 4)
     (setq indent-tabs-mode nil)
